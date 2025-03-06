@@ -1,0 +1,110 @@
+# goals.yaml
+#
+# This file defines the dynamic goals and milestones.
+#
+# To add a new goal:
+#   - Add a new entry under the "goals" list.
+#   - Each goal must include a "project" name and a list of "milestones".
+#
+# To add a new milestone to a goal:
+#   - Add a new item to the "milestones" list for that goal.
+#   - Each milestone should include:
+#       name: A descriptive title.
+#       date: A target or completion date.
+#       completed: true or false.
+#       current: (Optional) true or false if it's the current focus.
+#       steps: (Optional) A list of steps for that milestone.
+#
+# To add a step to a milestone:
+#   - Add a new item under the "steps" list.
+#   - Each step should include:
+#       name: A descriptive title.
+#       completed: true or false.
+#       current: (Optional) true or false.
+#
+# Please note that current marker only works if completion is set false
+
+goals:
+  - project: "kood/johvi"
+    milestones:
+      - name: "Go Completion"
+        date: "Feb 25, 2025"
+        completed: true
+      - name: "JavaScript Completion"
+        date: "Mar 15, 2025"
+        completed: true
+      - name: "DevOps Completion"
+        date: "Expected Apr 2025"
+        completed: false
+        current: true
+
+  - project: "DevOps focus"
+    milestones:
+      - name: "Kood/johvi DevOps module"
+        date: "Expected Apr 2025"
+        completed: false
+        current: true
+        steps:
+          - name: "Deep-in-net"
+            completed: true
+          - name: "Deep-in-system"
+            completed: true
+          - name: "crud-master"
+            completed: true
+          - name: "play-with-containers"
+            completed: true
+          - name: "orchestrator"
+            completed: false
+            current: true
+          - name: "cloud-design"
+            completed: false
+          - name: "code-keeper"
+            completed: false
+      - name: "Online Resume/Blog CI/CD"
+        date: "Feb 26, 2025"
+        completed: true
+        current: false
+      - name: "Terraform associate exam 003"
+        date: "Expected March 2025"
+        completed: false
+        current: true
+        steps:
+          - name: "Learning"
+            completed: false
+            current: true
+          - name: "Using Terraform"
+            completed: true
+          - name: "Trial exam"
+            completed: false
+          - name: "Full exam"
+            completed: false
+      - name: "Kubernetes Certification (CKA or CKAD)"
+        date: "Expected May 2025"
+        completed: false
+        steps:
+          - name: "Cluster setup & management"
+            completed: false
+          - name: "RBAC & security"
+            completed: false
+          - name: "Pod scheduling & networking"
+            completed: false
+          - name: "Logging, monitoring & troubleshooting"
+            completed: false
+            current: false
+          - name: "Trial exam"
+            completed: false
+          - name: "Full exam"
+            completed: false
+      - name: "GitOps & Infrastructure as Code (IaC) Project"
+        date: "Expected June 2025"
+        completed: false
+        steps:
+          - name: "Advanced GitOps principles"
+            completed: false
+          - name: "Setup ArgoCD/Flux"
+            completed: false
+          - name: "Automate deployments"
+            completed: false
+            current: false
+          - name: "Production-ready infrastructure setup"
+            completed: false

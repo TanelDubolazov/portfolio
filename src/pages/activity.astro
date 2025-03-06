@@ -1,0 +1,162 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import fs from 'fs';
+import yaml from 'yaml';
+
+const token = import.meta.env.GITHUB_TOKEN;
+const githubUsername = import.meta.env.GITHUB_USERNAME;
+
+// Helper function to determine badge color
+const getBadgeColor = (item) => {
+  if (item.completed) return "bg-green-500";
+  if (item.current) return "bg-yellow-500";
+  return "bg-red-500";
+};
+
+// Helper function to get status text
+const getStatusText = (item) => {
+  if (item.completed) return "done";
+  if (item.current) return "in progress";
+  return "planned";
+};
+
+// Helper function to determine step icon
+const getStepIcon = (step) => {
+  if (step.completed) return '✔'; // Completed
+  if (step.current) return '🛠️';   // Currently working on
+  return '⏳';                     // Planned (Not started)
+};
+
+// Fetch GitHub repositories
+const res = await fetch(
+  `https://api.github.com/users/${githubUsername}/repos?sort=updated`,
+  {
+    headers: {
+      Accept: 'application/vnd.github.v3+json',
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
+const allRepos = await res.json();
+const repos = allRepos.sort(
+  (a, b) => new Date(b.pushed_at).valueOf() - new Date(a.pushed_at).valueOf()
+);
+
+// Load dynamic goals from YAML file
+const file = fs.readFileSync('./goals.yaml', 'utf8');
+const { goals } = yaml.parse(file);
+
+const metadata = {
+  title: 'GitHub Projects',
+  description: 'My repositories, sorted by last commit date',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Section -->
+  <section class="relative py-16 bg-gradient-to-b from-blue-500 to-blue-700 text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-4xl font-bold tracking-tight mb-4">
+        🚀 Current Goals & Activity
+      </h1>
+      <p class="max-w-2xl mx-auto text-lg">
+        A collection of my active public projects and goals for self-improvement.
+      </p>
+    </div>
+  </section>
+
+  <!-- GitHub Repos Section -->
+  <section class="py-16 bg-gray-100 dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl mx-auto text-center mb-8">
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white">
+          📌 Latest GitHub Activity
+        </h2>
+        <p class="text-gray-600 dark:text-gray-400">
+          Check out my latest commits and contributions!
+        </p>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {repos.map((repo) => (
+          <div key={repo.id} class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform transition hover:scale-105">
+            <div class="p-6">
+              <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                {repo.name}
+              </h3>
+              <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                <strong>Last commit:</strong> {new Date(repo.pushed_at).toLocaleString()}
+              </p>
+              <p class="text-gray-700 dark:text-gray-300 mt-2">
+                {repo.description || 'No description provided.'}
+              </p>
+            </div>
+            <div class="p-4 bg-gray-50 dark:bg-gray-700 text-center">
+              <a href={repo.html_url} class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">
+                🔗 View on GitHub
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Goals & Milestones Timeline -->
+  <section class="py-16 bg-gray-50 dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl mx-auto text-center mb-8">
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white">
+          🎯 Goals & Milestones
+        </h2>
+        <p class="text-gray-600 dark:text-gray-400">
+          A roadmap of my projects, milestones, and expected completion dates.
+        </p>
+      </div>
+
+      <div class="space-y-12">
+        {goals.map((goal) => (
+          <div key={goal.project} class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+            <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              {goal.project}
+            </h3>
+            
+            <div class="relative border-l-4 border-blue-500 pl-6 space-y-6">
+              {goal.milestones.map((ms, mIndex) => (
+                <div key={ms.name} class="relative">
+                  <span class={`absolute -left-6 top-2 w-5 h-5 rounded-full ${getBadgeColor(ms)} text-white flex items-center justify-center text-xs font-bold`}>
+                    {mIndex + 1}
+                  </span>
+                  <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded shadow-md">
+                    <p class="text-lg font-medium text-gray-900 dark:text-white">
+                      {ms.name}
+                      <span class="ml-2 text-xs text-gray-500">({getStatusText(ms)})</span>
+                    </p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">{ms.date}</p>
+
+                    {ms.steps && ms.steps.length > 0 && (
+                      <div class="mt-4 border-l-2 border-blue-300 pl-4">
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">✅ Steps:</p>
+                        <ul class="space-y-1 text-sm">
+                          {ms.steps.map((step, sIndex) => (
+                            <li key={step.name} class={`flex items-center ${
+                              step.completed ? 'text-green-500' : 
+                              step.current ? 'text-yellow-500' : 
+                              'text-gray-500'
+                            }`}>
+                              {getStepIcon(step)} {step.name}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

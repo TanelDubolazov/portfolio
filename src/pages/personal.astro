@@ -1,0 +1,311 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Header from '~/components/widgets/Header.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import { getPermalink } from '~/utils/permalinks';
+
+const metadata = {
+  title: 'Tanel Dubolazov - Software Engineer & Sci-Fi Enthusiast',
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="announcement"></Fragment>
+  <Fragment slot="header">
+    <Header
+      links={[
+        { text: 'Home', href: '/' },
+        { text: 'About Me', href: '#about' },
+        { text: 'Interests', href: '#interests' },
+        { text: 'Future Plans', href: '#future-plans' },
+        { text: 'Blog', href: '#blog' },
+        { text: 'Github', href: 'https://github.com/TanelDubolazov' },
+      ]}
+      actions={[
+        {
+          text: 'Let\'s Connect',
+          href: '/contact',
+        },
+      ]}
+      isSticky
+      showToggleTheme
+    />
+  </Fragment>
+
+  <!-- Hero Widget ******************* -->
+
+  <Hero
+    id="hero"
+    title="Hi, I'm Tanel Dubolazov"
+    tagline="Software Engineer & Sci-Fi Enthusiast"
+    actions={[{ variant: 'primary', text: 'Let\'s Connect', href: getPermalink('/contact#form') }]}
+  >
+    <Fragment slot="subtitle">
+      I'm a software engineer who brings both technical precision <br >and creative perspective to every project. <br />
+      When I'm not coding, you'll find me immersed in sci-fi novels, strategizing <br> in games, or enjoying a nice sitcom.
+    </Fragment>
+  </Hero>
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    id="about"
+    columns={3}
+    items={[
+      {
+        icon: 'tabler:user',
+        callToAction: {
+          target: '_blank',
+          text: 'More about my journey',
+          href: '/blog',
+        },
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?q=80&w=2089&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      alt: 'Colorful Image',
+      loading: 'eager',
+    }}
+  >
+    <Fragment slot="content">
+      <h2 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">The Person Behind the Code</h2>
+      <p>
+        I've always been driven by curiosity – whether it was diving into the complex worlds of Asimov's Foundation series, 
+        mastering the strategic depths of games like Civilization, or simply breaking my toys apart as a kid to see
+        what makes them work.
+      </p>
+      <br />
+      <p>
+        While my professional focus is on backend engineering and DevOps, my previous experience in marketing and varied interests in 
+        literature, gaming, and motorsports give me a unique perspective on problem-solving and user experience. 
+        I find that the worlds we imagine often inspire the technologies we create.
+      </p>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Features3 Widget ************** -->
+
+  <Features3
+    id="interests"
+    title="Beyond the Keyboard"
+    subtitle="The passions and interests that shape my perspective and creativity"
+    columns={3}
+    items={[
+      {
+        title: 'Science Fiction',
+        description: 'From classic Asimov to modern Liu Cixin, I\'m fascinated by how sci-fi explores technological possibilities and human nature.',
+        icon: 'tabler:book',
+      },
+      {
+        title: 'Strategy Games',
+        description: 'Civilization, Stellaris, or classic Age of Empire 2 challenge my problem-solving skills and teach me to think several steps ahead.',
+        icon: 'tabler:chess',
+      },
+      {
+        title: 'Motorsports',
+        description: 'Formula 1 and WRC showcase the perfect blend of technological innovation, teamwork, and human skill under pressure.',
+        icon: 'tabler:steering-wheel',
+      },
+      {
+        title: 'Space Exploration',
+        description: 'Following developments in astronomy and space missions feeds my curiosity about our place in the universe.',
+        icon: 'tabler:rocket',
+      },
+      {
+        title: 'Sitcoms',
+        description: 'Sometimes after a long day there is nothing better than having a nice meal while watching some good old 2000s sitcoms.',
+        icon: 'tabler:device-desktop',
+      },
+      {
+        title: 'Hiking',
+        description: 'Disconnecting in nature helps me return to technical challenges with a fresh perspective and renewed focus.',
+        icon: 'tabler:mountain',
+      },
+    ]}
+  />
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    id="philosophy"
+    isReversed
+    items={[
+      {
+        title: 'Continuous Learning',
+        description: 'I have learned to learn quickly rather than learn everything at once. Learning isn\'t a phase - it\'s a lifelong journey.',
+        icon: 'tabler:bulb',
+      },
+      {
+        title: 'Balance',
+        description: '16 hour coding marathons might intially get results faster but I\'m in it for the long haul.',
+        icon: 'tabler:scale',
+      },
+      {
+        title: 'Collaboration',
+        description: 'Time after time I\'ve learned that collabartion gives results. Sometimes the fastest way to learn something is teaching it to someone else.',
+        icon: 'tabler:users',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      alt: 'Coding and Technology Image',
+    }}
+  >
+    <Fragment slot="content">
+      <h2 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">My Working Philosophy</h2>
+      <p>
+        I think one of the most important skills to a technical role is methodical thinking. Breaking things apart to their 
+        smallest details into bite sized pieces which we can digest, otherwise anything could seem overwhelming. This is Something
+        I've learned to do both in my marketing projects and more recently with software development, as projects grow and become more
+        complex.
+      </p>
+      <br />
+      <p>
+        I also believe that an extremely important component to any kind of efficient specialist is self-awareness. Understanding your limitations
+        while not limiting yourself, it's an incredibly difficult thing to balance. Should I use LLM to help me complete this project? Should I try 
+        a new framework or how do I avoid overengineering a simple application? All of that is hard to balance but I believe that with self-awareness,
+        time managament and the courage to try something new anything is possible and if I fail, I guess I've learned something new.
+      </p>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Features3 Widget ************** -->
+
+  <Features3
+    id="future-plans"
+    title="Future Learning Path"
+    subtitle="My roadmap for developing expertise in DevOps and backend engineering"
+    columns={3}
+    defaultIcon="tabler:point-filled"
+    items={[
+      {
+        title: 'DevOps Essentials',
+        description: 'CI/CD pipelines, Infrastructure as Code (Terraform, Ansible), container orchestration with Kubernetes',
+        icon: 'tabler:cloud',
+      },
+      {
+        title: 'Backend Engineering',
+        description: 'Distributed systems, API design patterns, microservices architecture, event-driven development',
+        icon: 'tabler:server',
+      },
+      {
+        title: 'Cloud Platforms',
+        description: 'AWS core services, Azure fundamentals, multi-cloud strategies',
+        icon: 'tabler:cloud-computing',
+      },
+      {
+        title: 'Monitoring & Observability',
+        description: 'Prometheus, Grafana, ELK stack, distributed tracing with Jaeger',
+        icon: 'tabler:chart-line',
+      },
+      {
+        title: 'Database Technologies',
+        description: 'PostgreSQL optimization, NoSQL solutions (MongoDB, Redis), database sharding strategies',
+        icon: 'tabler:database',
+      },
+      {
+        title: 'Security & Compliance',
+        description: 'DevSecOps practices, vulnerability scanning, secrets management, compliance automation',
+        icon: 'tabler:shield',
+      },
+    ]}
+  />
+
+  <!-- Progress CallToAction Widget *********** -->
+
+<CallToAction
+title="Track My Learning Journey"
+subtitle="See what I'm currently working on and the skills I'm developing in real-time."
+actions={[
+  {
+    variant: 'primary',
+    text: 'See My Current Progress',
+    href: '/activity',
+  }
+]}
+/>
+
+  <!-- Content Widget **************** -->
+  <Content
+    id="bookshelf"
+    title="Current Bookshelf"
+    subtitle="A glimpse into what's currently inspiring me"
+    items={[
+      {
+        title: 'Science Fiction',
+        description: '"Project Hail Mary" by Andy Weir, "The Three-Body Problem" by Liu Cixin, "Children of Time" by Adrian Tchaikovsky',
+        icon: 'tabler:books',
+      },
+      {
+        title: 'Technical Reading',
+        description: '"Clean Architecture" by Robert C. Martin, "Designing Data-Intensive Applications" by Martin Kleppmann',
+        icon: 'tabler:code',
+      },
+      {
+        title: 'Other Interests',
+        description: '"How to Build a Car" by Adrian Newey, "Range" by David Epstein',
+        icon: 'tabler:notebook',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2090&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      alt: 'Books on shelf',
+    }}
+  >
+    <Fragment slot="content">
+      <h2 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">What I'm Reading</h2>
+      <p>
+        Books have always been portals to new ideas and perspectives for me. My reading habits reflect my diverse interests and continuous
+        desire to learn across multiple domains. Here's what's currently on my nightstand or in my e-reader.
+      </p>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- CallToAction Widget *********** -->
+
+  <CallToAction
+    title="I'm open for work or collaboration"
+    subtitle="Looking for a software engineer who brings both technical expertise and creative perspective? I'm currently open to new opportunities."
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Get in Touch',
+        href: '/contact',
+      },
+      {
+        text: 'View My GitHub',
+        href: 'https://github.com/TanelDubolazov',
+        target: '_blank',
+      },
+    ]}
+  />
+
+  <!-- BlogLatestPost Widget **************** -->
+
+  <BlogLatestPosts
+    id="blog"
+    title="Thoughts, Ideas, and Learnings"
+    information={`From technical explorations to thoughts on sci-fi and gaming, my blog is where I share insights across my professional and personal interests. Join me as I connect the dots between technology and imagination.`}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </BlogLatestPosts>
+</Layout>

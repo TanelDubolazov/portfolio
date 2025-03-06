@@ -1,0 +1,270 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import { Fragment } from 'astro/jsx-runtime';
+
+const metadata = {
+  title: 'Tanel Dubolazov - DevOps Engineer & Software Developer',
+  description: 'Professional portfolio of Tanel Dubolazov, a DevOps Engineer and Software Developer with expertise in cloud solutions, automation, and software engineering.',
+  ogTitle: 'Tanel Dubolazov - DevOps Engineer & Software Developer',
+  ogType: 'website',
+  ogImage: '~/assets/images/profile-og.jpg',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Section -->
+  <Hero
+    id="hero"
+    title="Tanel Dubolazov"
+    tagline="DevOps Engineer | Software Developer"
+    actions={[
+      { variant: 'primary', text: 'Hire Me', href: '/contact#form' },
+      { text: 'View Portfolio', href: '#projects' },
+    ]}
+    image={{
+      src: '~/assets/images/profile.jpg',
+      alt: 'Tanel Dubolazov profile',
+      loading: 'eager',
+    }}
+  >
+    <Fragment slot="subtitle">
+      I'm a software engineer specializing in DevOps practices and cloud infrastructure. 
+      With a background in marketing, I bring a unique perspective to technical projects, 
+      focusing on both functionality and user experience. I excel at optimizing systems, 
+      automating workflows, and building scalable solutions.
+    </Fragment>
+  </Hero>
+
+  <!-- About Me Section -->
+  <Content
+    id="about"
+    columns={3}
+    items={[
+      {
+        icon: 'tabler:user',
+        callToAction: {
+          target: '_blank',
+          text: 'Learn more about me',
+          href: '/personal',
+        },
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1593720219276-0b1eacd0aef4?q=80&w=2089&auto=format&fit=crop&ixlib=rb-4.0.3',
+      alt: 'DevOps Workflow',
+      loading: 'lazy',
+    }}
+  >
+    <Fragment slot="content">
+      <h2 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-4">About Me</h2>
+      <p class="mb-4">
+        Throughout my journey from marketing to e-commerce to software engineering, 
+        I've developed a passion for understanding complex systems and building efficient solutions.
+      </p>
+      <p class="mb-4">
+        I approach technical challenges with curiosity and resilience. 
+        When faced with system failures, I don't just fix the immediate issue - I analyze the root cause 
+        and implement sustainable improvements. This investigative mindset drives my work in DevOps, where 
+        I break down infrastructure into manageable components and design robust automation pipelines.
+      </p>
+      <p>
+        Rather than spreading myself thin across every technology, 
+        I focus on strategic learning and adaptability. 
+        I prioritize understanding core concepts that transfer across tools and platforms, 
+        allowing me to quickly master new technologies when needed for specific projects or challenges.
+      </p>
+    </Fragment>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-slate-900"></div>
+    </Fragment>
+  </Content>
+
+  <Stats
+  title="By the Numbers"
+  stats={[
+    { title: 'Years in Software Development', amount: '2' },
+    { title: 'Completed Projects', amount: '20+' },
+    { title: 'Years Marketing Experience', amount: '7+' },
+    { title: 'Programming Languages', amount: '3' },
+  ]}
+/>
+
+  <!-- Skills Section -->
+  <Features3
+    id="skills"
+    title="Technical Skills"
+    subtitle="My technical toolkit for building and optimizing modern applications"
+    columns={3}
+    defaultIcon="tabler:code"
+    items={[
+      { 
+        title: 'Languages',
+        description: 'Go, JavaScript, Bash, SQL',
+        icon: 'tabler:code' 
+      },
+      { 
+        title: 'Cloud & DevOps',
+        description: 'Docker, GitHub Actions, Terraform, CI/CD pipelines, Cloud infrastructure',
+        icon: 'tabler:cloud' 
+      },
+      { 
+        title: 'Backend',
+        description: 'Node.js, Express.js, RESTful APIs, WebSockets, Microservices',
+        icon: 'tabler:server' 
+      },
+      { 
+        title: 'Frontend',
+        description: 'React.js, HTML5, CSS3, Responsive design',
+        icon: 'tabler:brand-react' 
+      },
+      { 
+        title: 'Databases',
+        description: 'PostgreSQL, MySQL, SQLite, Database optimization',
+        icon: 'tabler:database' 
+      },
+      { 
+        title: 'Tools & Practices',
+        description: 'Git, Agile methodology, Vagrant, Postman, Monitoring, Logging',
+        icon: 'tabler:tools' 
+      },
+    ]}
+    classes={{ container: 'max-w-5xl' }}
+  />
+
+  <!-- Education Section -->
+  <Steps
+    id="education"
+    title="Education"
+    items={[
+      {
+        title: `Full Stack Engineering with DevOps Focus <br /> <span class="font-normal">kood / Jõhvi</span> <br /> <span class="text-sm font-normal">2023 - 2025</span>`,
+        description: `Intensive program focused on practical software engineering and DevOps skills. <br /> Specialized in cloud infrastructure design, containerization, and CI/CD pipelines. <br /> Completed extensive hands-on projects in both independent and team settings.`,
+        icon: 'tabler:school',
+      },
+    ]}
+    classes={{ container: 'max-w-3xl' }}
+  />
+
+  <!-- Projects Section -->
+  <Content
+    id="projects"
+    title="Featured Projects"
+    subtitle="Recent work showcasing my technical capabilities"
+    isReversed={true}
+    image={{
+      src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3',
+      alt: 'Project development',
+      loading: 'lazy',
+    }}
+  >
+    <Fragment slot="content">
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-xl font-bold dark:text-white">Social Network Platform</h3>
+          <p class="mt-2">
+            Collaborated on developing a full-featured social platform with real-time capabilities.
+            <span class="block mt-1 text-sm text-gray-700 dark:text-gray-400">
+              <strong>Technologies:</strong> React, Go, WebSockets, PostgreSQL, Docker
+            </span>
+            <span class="block mt-1 text-sm text-gray-700 dark:text-gray-400">
+              <strong>Role:</strong> Frontend architecture, WebSocket integration, Containerization
+            </span>
+          </p>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold dark:text-white">Microservices Content Platform</h3>
+          <p class="mt-2">
+            Designed and implemented a scalable API for content streaming with advanced message queuing.
+            <span class="block mt-1 text-sm text-gray-700 dark:text-gray-400">
+              <strong>Technologies:</strong> Node.js, PostgreSQL, RabbitMQ, API Gateway
+            </span>
+            <span class="block mt-1 text-sm text-gray-700 dark:text-gray-400">
+              <strong>Role:</strong> System architecture, API design, Infrastructure as Code implementation
+            </span>
+          </p>
+        </div>
+        
+        <div>
+          <h3 class="text-xl font-bold dark:text-white">Real-Time-Forum</h3>
+          <p class="mt-2">
+            Built a secure, performant forum application with real-time messaging capabilities.
+            <span class="block mt-1 text-sm text-gray-700 dark:text-gray-400">
+              <strong>Technologies:</strong> Go, JavaScript, SQLite, WebSockets, JWT authentication
+            </span>
+            <span class="block mt-1 text-sm text-gray-700 dark:text-gray-400">
+              <strong>Role:</strong> Backend development, Database design, Authentication system
+            </span>
+          </p>
+        </div>
+      </div>
+      
+      <div class="mt-6">
+        <a href="/portfolio" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium">
+          View all projects
+          <svg class="w-5 h-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </a>
+      </div>
+    </Fragment>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-slate-900"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Work Experience Section -->
+  <Steps
+    id="experience"
+    title="Professional Experience"
+    items={[
+      {
+        title: 'Student Developer & Auditor <br /> <span class="font-normal">kood / Jõhvi</span> <br /> <span class="text-sm font-normal">2023 - 2025</span>',
+        description: `Developed full-stack applications with a focus on DevOps practices and cloud infrastructure. <br /> 
+        Implemented CI/CD pipelines and containerization strategies for project deployments. <br /> 
+        Collaborated in Agile teams to deliver complex applications with strict deadlines. <br />
+        Performed code reviews and technical audits for peer projects.`,
+        icon: 'tabler:briefcase',
+      },
+      {
+        title: 'Marketing Specialist <br /> <span class="font-normal">Freelance</span> <br /> <span class="text-sm font-normal">2018 - 2023</span>',
+        description: `Designed and launched e-commerce platforms using Shopify, including technical customizations. <br /> 
+        Developed data-driven marketing campaigns leveraging analytics and automation tools. <br /> 
+        Managed database systems for product catalogs and implemented dynamic pricing algorithms. <br />
+        Created technical documentation and workflow systems for client operations.`,
+        icon: 'tabler:briefcase',
+      },
+    ]}
+    classes={{ container: 'max-w-3xl' }}
+  />
+
+  <!-- Call to Action Section -->
+  <CallToAction
+    title="Open for work"
+    subtitle="I'm currently available for hire in devops or backend engineering."
+    actions={[
+      { variant: 'primary', text: 'Contact Me', href: '/contact#form' },
+      { text: 'View Resume', href: '/cv', target: '_blank' }
+    ]}
+    classes={{ container: 'max-w-xl' }}
+  />
+
+  <!-- Blog Section -->
+  <BlogLatestPosts
+    id="blog"
+    title="Technical Insights"
+    information="Dive into my latest articles on DevOps best practices, cloud architecture, and software development."
+    postIds={['post-1', 'post-2', 'post-3']}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-slate-900"></div>
+    </Fragment>
+  </BlogLatestPosts>
+</Layout>
