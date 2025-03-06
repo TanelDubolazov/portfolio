@@ -7,7 +7,6 @@ import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import Stats from '~/components/widgets/Stats.astro';
-import { Fragment } from 'astro/jsx-runtime';
 
 const metadata = {
   title: 'Tanel Dubolazov - DevOps Engineer & Software Developer',
@@ -34,12 +33,12 @@ const metadata = {
       loading: 'eager',
     }}
   >
-    <Fragment slot="subtitle">
+    <div slot="subtitle">
       I'm a software engineer specializing in DevOps practices and cloud infrastructure. 
       With a background in marketing, I bring a unique perspective to technical projects, 
       focusing on both functionality and user experience. I excel at optimizing systems, 
       automating workflows, and building scalable solutions.
-    </Fragment>
+    </div>
   </Hero>
 
   <!-- About Me Section -->
@@ -62,7 +61,7 @@ const metadata = {
       loading: 'lazy',
     }}
   >
-    <Fragment slot="content">
+    <div slot="content">
       <h2 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-4">About Me</h2>
       <p class="mb-4">
         Throughout my journey from marketing to e-commerce to software engineering, 
@@ -80,21 +79,22 @@ const metadata = {
         I prioritize understanding core concepts that transfer across tools and platforms, 
         allowing me to quickly master new technologies when needed for specific projects or challenges.
       </p>
-    </Fragment>
-    <Fragment slot="bg">
+    </div>
+    <div slot="bg">
       <div class="absolute inset-0 bg-blue-50 dark:bg-slate-900"></div>
-    </Fragment>
+    </div>
   </Content>
 
+  <!-- Stats Section -->
   <Stats
-  title="By the Numbers"
-  stats={[
-    { title: 'Years in Software Development', amount: '2' },
-    { title: 'Completed Projects', amount: '20+' },
-    { title: 'Years Marketing Experience', amount: '7+' },
-    { title: 'Programming Languages', amount: '3' },
-  ]}
-/>
+    title="By the Numbers"
+    stats={[
+      { title: 'Years in Software Development', amount: '2' },
+      { title: 'Completed Projects', amount: '20+' },
+      { title: 'Years Marketing Experience', amount: '7+' },
+      { title: 'Programming Languages', amount: '3' },
+    ]}
+  />
 
   <!-- Skills Section -->
   <Features3
@@ -164,9 +164,9 @@ const metadata = {
       loading: 'lazy',
     }}
   >
-    <Fragment slot="content">
+    <div slot="content">
       <div class="space-y-6">
-        <div>
+        <div class="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-sm hover:shadow-md transition-shadow">
           <h3 class="text-xl font-bold dark:text-white">Social Network Platform</h3>
           <p class="mt-2">
             Collaborated on developing a full-featured social platform with real-time capabilities.
@@ -179,7 +179,7 @@ const metadata = {
           </p>
         </div>
         
-        <div>
+        <div class="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-sm hover:shadow-md transition-shadow">
           <h3 class="text-xl font-bold dark:text-white">Microservices Content Platform</h3>
           <p class="mt-2">
             Designed and implemented a scalable API for content streaming with advanced message queuing.
@@ -192,7 +192,7 @@ const metadata = {
           </p>
         </div>
         
-        <div>
+        <div class="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-sm hover:shadow-md transition-shadow">
           <h3 class="text-xl font-bold dark:text-white">Real-Time-Forum</h3>
           <p class="mt-2">
             Built a secure, performant forum application with real-time messaging capabilities.
@@ -206,18 +206,18 @@ const metadata = {
         </div>
       </div>
       
-      <div class="mt-6">
-        <a href="/portfolio" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium">
+      <div class="mt-8">
+        <a href="/portfolio" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors">
           View all projects
           <svg class="w-5 h-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
           </svg>
         </a>
       </div>
-    </Fragment>
-    <Fragment slot="bg">
+    </div>
+    <div slot="bg">
       <div class="absolute inset-0 bg-blue-50 dark:bg-slate-900"></div>
-    </Fragment>
+    </div>
   </Content>
 
   <!-- Work Experience Section -->
@@ -261,10 +261,9 @@ const metadata = {
     id="blog"
     title="Technical Insights"
     information="Dive into my latest articles on DevOps best practices, cloud architecture, and software development."
-    postIds={['post-1', 'post-2', 'post-3']}
   >
-    <Fragment slot="bg">
+    <div slot="bg">
       <div class="absolute inset-0 bg-blue-50 dark:bg-slate-900"></div>
-    </Fragment>
+    </div>
   </BlogLatestPosts>
 </Layout>
