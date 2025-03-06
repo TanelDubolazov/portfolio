@@ -1,0 +1,75 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import ContactUs from '~/components/widgets/Contact.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+
+const metadata = {
+  title: 'Contact',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- HeroText Widget ******************* -->
+
+  <ContactUs
+    id="form"
+    title="Drop me a messsage!"
+    subtitle="Send me a message here or any of the channels below."
+    inputs={[
+      {
+        type: 'text',
+        name: 'name',
+        label: 'Name',
+      },
+      {
+        type: 'email',
+        name: 'email',
+        label: 'Email',
+      },
+    ]}
+    textarea={{
+      label: 'Message',
+    }}
+    disclaimer={{
+      label:
+        'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
+    }}
+  />
+
+  <!-- Features2 Widget ************** -->
+
+  <Features2
+  title="Happy to make new connections!"
+  items={[
+    {
+      title: 'LinkedIn',
+      description: '<a href="https://www.linkedin.com/in/tanel-dubolazov" target="_blank" rel="noopener noreferrer">https://www.linkedin.com/in/tanel-dubolazov</a>',
+      icon: 'tabler:brand-linkedin',
+    },
+    {
+      title: 'GitHub',
+      description: '<a href="https://github.com/TanelDubolazov" target="_blank" rel="noopener noreferrer">https://github.com/TanelDubolazov</a>',
+      icon: 'tabler:brand-github',
+    },
+    {
+      title: 'Discord',
+      description: 'taneld',
+      icon: 'tabler:brand-discord',
+    },
+    {
+      title: 'Phone',
+      description: '<a href="tel:+37256994112">+372 56 994 112</a>',
+      icon: 'tabler:headset',
+    },
+    {
+      title: 'Email',
+      description: '<a href="mailto:Tanel.Dubolazov@gmail.com">Tanel.Dubolazov@gmail.com</a>',
+      icon: 'tabler:mail',
+    },
+    {
+      title: 'Location',
+      description: 'Tartu, Estonia',
+      icon: 'tabler:map-pin',
+    },
+  ]}
+/>

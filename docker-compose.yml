@@ -1,0 +1,6 @@
+services:
+  astrowind:
+    build: .
+    container_name: tanel.dev
+    ports:
+      - 8080:8080

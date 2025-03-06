@@ -1,0 +1,251 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: 'A4 CV Print Page',
+  description: "CV page in an official format.",
+};
+---
+
+
+<Layout metadata={metadata}>
+  <!-- The Print Button is wrapped in a .no-print class so it's not shown in the PDF -->
+  <div class="my-4 flex items-center justify-center no-print">
+    <button
+      class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+      onClick="window.print()"
+    >
+      Print CV
+    </button>
+  </div>
+
+  <style>
+    /* Basic resets */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-size: 10pt; /* Reduced font size for better fit */
+    }
+
+    /* Hide everything except .cv-container in print */
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+      body {
+        background: #fff !important;
+      }
+      /* 
+        Hides all elements 
+        that are not .cv-container or its children
+      */
+      body *:not(.cv-container):not(.cv-container *) {
+        display: none !important;
+      }
+      /* Force page to print on a single page */
+      .a4-page {
+        page-break-after: avoid;
+        page-break-inside: avoid;
+      }
+      /* Ensure no sections break across pages */
+      section {
+        page-break-inside: avoid;
+      }
+    }
+
+    .cv-container {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    .a4-page {
+      width: 210mm;       /* A4 width */
+      min-height: 297mm;  /* A4 height */
+      height: 297mm;      /* Fixed height */
+      background: #fff;
+      padding: 10mm;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+      overflow: hidden;   /* Hide overflow content */
+      position: relative; /* For better control */
+    }
+
+    @media print {
+      .a4-page {
+        box-shadow: none;
+        width: 100%;
+        height: auto;     /* Auto height on print */
+        min-height: auto;
+        margin: 0;
+        padding: 10mm; 
+      }
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 8px; /* Reduced margin */
+    }
+    h1 {
+      margin-bottom: 5px; /* Reduced margin */
+      font-size: 14pt;    /* Smaller heading */
+    }
+    .contact-info {
+      margin-bottom: 8px;
+      word-wrap: break-word;
+    }
+    h2 {
+      border-bottom: 1px solid #333; /* Thinner border */
+      padding-bottom: 2px;
+      margin-bottom: 4px;
+      margin-top: 6px;    /* Added margin top */
+      font-size: 11pt;
+    }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 3px; /* Reduced margin */
+      flex-wrap: wrap;
+    }
+    .row h3 {
+      margin: 0;
+      font-size: 10pt;
+      font-weight: bold;
+    }
+    .date {
+      text-align: right;
+    }
+    .repo-link {
+      text-align: right;
+      font-size: 9pt;     /* Smaller font */
+      word-break: break-all;
+    }
+    ul {
+      padding-left: 13px;
+      margin-top: 2px;
+      margin-bottom: 6px; /* Reduced margin */
+    }
+    li {
+      margin-bottom: 2px; /* Space between list items */
+    }
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .skills-list {
+      margin-bottom: 3px; /* Add spacing between skill lines */
+    }
+    
+    /* Compact view for sections that might be too large */
+    #projects ul li, #experience ul li {
+      line-height: 1.3;  /* Tighter line height */
+    }
+    
+    section {
+      margin-bottom: 8px; /* Consistent section spacing */
+    }
+  </style>
+
+  <div class="cv-container">
+    <div class="a4-page">
+      <header>
+        <h1>Tanel Dubolazov</h1>
+        <div class="contact-info">
+          <a href="https://github.com/TanelDubolazov" target="_blank">GitHub</a>
+        </div>
+      </header>
+
+      <section class="section" id="skills">
+        <h2>Skills</h2>
+        <div class="skills-list"><strong>Languages:</strong> Go, JavaScript, Bash</div>
+        <div class="skills-list"><strong>Web Technologies:</strong> React.js, Node.js, Express.js, WebSockets, REST API, HTML, CSS</div>
+        <div class="skills-list"><strong>Data:</strong> PostgreSQL, SQLite, MySQL</div>
+        <div class="skills-list"><strong>Tools:</strong> Git, Docker, Vagrant, PM2, Postman, Terraform, Cisco, GitHub Actions</div>
+      </section>
+
+      <section class="section" id="education">
+        <h2>Education</h2>
+        <div class="row">
+          <h3>Kood/Jõhvi – Full-Stack Web Development (DevOps Specialization)</h3>
+          <div class="date">Sep 2023 – Aug 2025</div>
+        </div>
+      </section>
+
+      <section class="section" id="projects">
+        <h2>Projects</h2>
+        <div class="row">
+          <h3>Social Network</h3>
+          <div class="repo-link">
+            <a href="https://github.com/TanelDubolazov/social-network" target="_blank">
+              github.com/TanelDubolazov/social-network
+            </a>
+          </div>
+        </div>
+        <ul>
+          <li>Team project to develop a Facebook-like social network with authentication, posts, followers, and chat.</li>
+          <li>Built the frontend in React, integrating with an existing Go-based REST API and WebSockets for real-time messaging.</li>
+          <li>Took full-stack responsibility despite frontend not being my primary focus, implementing backend modifications where needed.</li>
+        </ul>
+
+        <div class="row">
+          <h3>CRUD Master</h3>
+          <div class="repo-link">
+            <a href="https://github.com/TanelDubolazov/crud-master" target="_blank">
+              github.com/TanelDubolazov/crud-master
+            </a>
+          </div>
+        </div>
+        <ul>
+          <li>Independently designed a microservices-based movie streaming API using Node.js and PostgreSQL.</li>
+          <li>Implemented an API Gateway for request routing, integrating RabbitMQ for message queuing.</li>
+          <li>Used Vagrant to provision three virtual machines (API Gateway, Inventory, and Billing services).</li>
+        </ul>
+
+        <div class="row">
+          <h3>Real-Time Forum</h3>
+          <div class="repo-link">
+            <a href="https://github.com/TanelDubolazov/real-time-forum" target="_blank">
+              github.com/TanelDubolazov/real-time-forum
+            </a>
+          </div>
+        </div>
+        <ul>
+          <li>Collaborated in a team to develop a Go/JavaScript-based forum with real-time chat.</li>
+          <li>Integrated SQLite for lightweight storage and bcrypt for secure authentication.</li>
+          <li>Conducted code reviews ensuring clean, maintainable code.</li>
+        </ul>
+      </section>
+
+      <section class="section" id="experience">
+        <h2>Experience</h2>
+        <div class="row">
+          <h3>Marketing Specialist (Freelance)</h3>
+          <div class="date">Jan 2018 – Sep 2023</div>
+        </div>
+        <ul>
+          <li>Designed, launched, and managed Shopify e-commerce stores.</li>
+          <li>Developed and optimized paid advertising campaigns on Facebook and Google Ads.</li>
+          <li>Handled product sourcing, database management, and dynamic pricing strategies.</li>
+        </ul>
+
+        <div class="row">
+          <h3>Student | Auditor (Kood/Jõhvi)</h3>
+          <div class="date">Sep 2023 – Aug 2025</div>
+        </div>
+        <ul>
+          <li>Completed full-stack development projects in Go and JavaScript, specializing in DevOps.</li>
+          <li>Conducted peer audits evaluating code quality & best practices.</li>
+          <li>Worked on team-based projects, focusing on clean architecture and sprint deadlines.</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</Layout>
