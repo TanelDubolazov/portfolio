@@ -12,8 +12,11 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <div slot="announcement"></div>
-  <div slot="header">
+  <!-- Use Fragment like in your working page -->
+  <Fragment slot="announcement"></Fragment>
+  
+  <!-- Use Fragment for header like in your working page -->
+  <Fragment slot="header">
     <Header
       links={[
         { text: 'Home', href: '/' },
@@ -32,7 +35,7 @@ const metadata = {
       isSticky
       showToggleTheme
     />
-  </div>
+  </Fragment>
 
   <!-- Hero Banner Section -->
   <section class="relative py-16 md:py-32 bg-[url('https://images.unsplash.com/photo-1488229297570-58520851e868?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3')] bg-cover bg-center">
