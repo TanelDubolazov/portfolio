@@ -1,29 +1,26 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-
 import Header from '~/components/widgets/Header.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Content from '~/components/widgets/Content.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import Features3 from '~/components/widgets/Features3.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
-import { getPermalink } from '~/utils/permalinks';
 
 const metadata = {
-  title: 'Tanel Dubolazov - Software Engineer & Sci-Fi Enthusiast',
+  title: 'Tanel Dubolazov - Beyond the Code',
+  description: 'Exploring the personal side of Tanel Dubolazov - software engineer, sci-fi enthusiast, and lifelong learner.',
 };
 ---
 
 <Layout metadata={metadata}>
-  <Fragment slot="announcement"></Fragment>
-  <Fragment slot="header">
+  <div slot="announcement"></div>
+  <div slot="header">
     <Header
       links={[
         { text: 'Home', href: '/' },
         { text: 'About Me', href: '#about' },
         { text: 'Interests', href: '#interests' },
-        { text: 'Future Plans', href: '#future-plans' },
-        { text: 'Blog', href: '#blog' },
+        { text: 'Philosophy', href: '#philosophy' },
+        { text: 'Reading List', href: '#bookshelf' },
         { text: 'Github', href: 'https://github.com/TanelDubolazov' },
       ]}
       actions={[
@@ -35,65 +32,60 @@ const metadata = {
       isSticky
       showToggleTheme
     />
-  </Fragment>
+  </div>
 
-  <!-- Hero Widget ******************* -->
-
-  <Hero
-    id="hero"
-    title="Hi, I'm Tanel Dubolazov"
-    tagline="Software Engineer & Sci-Fi Enthusiast"
-    actions={[{ variant: 'primary', text: 'Let\'s Connect', href: getPermalink('/contact#form') }]}
-  >
-    <Fragment slot="subtitle">
-      I'm a software engineer who brings both technical precision <br >and creative perspective to every project. <br />
-      When I'm not coding, you'll find me immersed in sci-fi novels, strategizing <br> in games, or enjoying a nice sitcom.
-    </Fragment>
-  </Hero>
-
-  <!-- Content Widget **************** -->
-
-  <Content
-    id="about"
-    columns={3}
-    items={[
-      {
-        icon: 'tabler:user',
-        callToAction: {
-          target: '_blank',
-          text: 'More about my journey',
-          href: '/blog',
-        },
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?q=80&w=2089&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      alt: 'Colorful Image',
-      loading: 'eager',
-    }}
-  >
-    <Fragment slot="content">
-      <h2 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">The Person Behind the Code</h2>
-      <p>
-        I've always been driven by curiosity – whether it was diving into the complex worlds of Asimov's Foundation series, 
-        mastering the strategic depths of games like Civilization, or simply breaking my toys apart as a kid to see
-        what makes them work.
+  <!-- Hero Banner Section -->
+  <section class="relative py-16 md:py-32 bg-[url('https://images.unsplash.com/photo-1488229297570-58520851e868?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3')] bg-cover bg-center">
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-gray-900/80"></div>
+    <div class="relative container mx-auto px-4 flex flex-col items-center text-center">
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-white mb-6">
+        Beyond the Code
+      </h1>
+      <p class="text-xl md:text-2xl text-blue-100 max-w-2xl">
+        The personal side of my journey through technology, creativity, and continuous learning.
       </p>
-      <br />
-      <p>
-        While my professional focus is on backend engineering and DevOps, my previous experience in marketing and varied interests in 
-        literature, gaming, and motorsports give me a unique perspective on problem-solving and user experience. 
-        I find that the worlds we imagine often inspire the technologies we create.
-      </p>
-    </Fragment>
+    </div>
+  </section>
 
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
+  <!-- About Me - Grid Layout -->
+  <section id="about" class="py-16 md:py-24 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">
+            The Person Behind the Code
+          </h2>
+          <p class="text-lg text-gray-700 dark:text-gray-300 mb-4">
+            I've always been driven by curiosity – whether I'm reading an interesting book, strategizing in a game, or trying to understand how something works. 
+            This curiosity has been the common thread throughout my life, from taking apart my toys as a kid to diving into complex technical systems today.
+          </p>
+          <p class="text-lg text-gray-700 dark:text-gray-300">
+            My background in marketing combined with my interest in technology gives me a different perspective on technical challenges. 
+            I can see both the human and technical sides of problems, which helps me build solutions that are not just functional, but also practical and user-friendly.
+          </p>
+          <div class="mt-8">
+            <a href="/blog" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors">
+              More about my journey
+              <svg class="w-5 h-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="relative">
+          <img 
+            src="https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?q=80&w=2089&auto=format&fit=crop&ixlib=rb-4.0.3" 
+            alt="Colorful abstract image" 
+            class="rounded-lg shadow-xl w-full"
+          />
+          <div class="absolute -bottom-5 -left-5 w-24 h-24 bg-blue-600 rounded-lg opacity-20"></div>
+          <div class="absolute -top-5 -right-5 w-24 h-24 bg-blue-600 rounded-lg opacity-20"></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- Features3 Widget ************** -->
-
+  <!-- Interests - Visually Distinct Cards -->
   <Features3
     id="interests"
     title="Beyond the Keyboard"
@@ -131,158 +123,157 @@ const metadata = {
         icon: 'tabler:mountain',
       },
     ]}
+    classes={{
+      container: 'max-w-6xl',
+      icon: 'text-blue-600 dark:text-blue-400',
+    }}
   />
 
-  <!-- Content Widget **************** -->
+  <!-- Philosophy Section - More Visual Impact -->
+  <section id="philosophy" class="py-16 md:py-24 bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold tracking-tight text-center text-gray-900 dark:text-white mb-12">My Working Philosophy</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+          <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-400" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7" /><path d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3" /><path d="M9.7 17l4.6 0" /></svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">Continuous Learning</h3>
+          <p class="text-gray-700 dark:text-gray-300">I have learned to learn quickly rather than learn everything at once. Learning isn't a phase - it's a lifelong journey.</p>
+        </div>
+        
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+          <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-400" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M16 6m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /><path d="M8 6m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /><path d="M12 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M10 18h4" /><path d="M8 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M16 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /></svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">Methodical Thinking</h3>
+          <p class="text-gray-700 dark:text-gray-300">I approach challenges by breaking them down into manageable parts. This allows me to tackle complex problems one step at a time, making even the most daunting tasks achievable.</p>
+        </div>
+        
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+          <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-400" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3l4.919 4.5c.61 .587 1.177 1.177 1.703 1.771a5.316 5.316 0 0 1 .264 6.979c-1.18 1.56 -3.338 1.92 -4.886 .75v1l1 3h-6l1 -3v-1c-1.54 1.07 -3.735 .772 -4.886 -.75a5.316 5.316 0 0 1 .264 -6.979a30.882 30.882 0 0 1 1.703 -1.771a1541.72 1541.72 0 0 1 4.919 -4.5z" /></svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">Balance & Self-Awareness</h3>
+          <p class="text-gray-700 dark:text-gray-300">Understanding your limitations while not limiting yourself. 16-hour coding marathons might initially get results faster, but I'm in it for the long haul.</p>
+        </div>
+      </div>
+      
+      <div class="mt-12 bg-white dark:bg-gray-800 p-8 rounded-xl shadow-md">
+        <p class="text-gray-700 dark:text-gray-300">
+          I've found that self-awareness is key to growth in both personal and professional life. Knowing when to use new tools like AI assistants, 
+          when to learn a new framework, or when to keep things simple helps me make better decisions. It's about finding the right balance – pushing 
+          myself to grow while recognizing when to stick with what works. And when things don't go as planned? That's just another opportunity to learn 
+          something valuable.
+        </p>
+      </div>
+    </div>
+  </section>
 
-  <Content
-    id="philosophy"
-    isReversed
-    items={[
-      {
-        title: 'Continuous Learning',
-        description: 'I have learned to learn quickly rather than learn everything at once. Learning isn\'t a phase - it\'s a lifelong journey.',
-        icon: 'tabler:bulb',
-      },
-      {
-        title: 'Balance',
-        description: '16 hour coding marathons might intially get results faster but I\'m in it for the long haul.',
-        icon: 'tabler:scale',
-      },
-      {
-        title: 'Collaboration',
-        description: 'Time after time I\'ve learned that collabartion gives results. Sometimes the fastest way to learn something is teaching it to someone else.',
-        icon: 'tabler:users',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      alt: 'Coding and Technology Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h2 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">My Working Philosophy</h2>
-      <p>
-        I think one of the most important skills to a technical role is methodical thinking. Breaking things apart to their 
-        smallest details into bite sized pieces which we can digest, otherwise anything could seem overwhelming. This is Something
-        I've learned to do both in my marketing projects and more recently with software development, as projects grow and become more
-        complex.
-      </p>
-      <br />
-      <p>
-        I also believe that an extremely important component to any kind of efficient specialist is self-awareness. Understanding your limitations
-        while not limiting yourself, it's an incredibly difficult thing to balance. Should I use LLM to help me complete this project? Should I try 
-        a new framework or how do I avoid overengineering a simple application? All of that is hard to balance but I believe that with self-awareness,
-        time managament and the courage to try something new anything is possible and if I fail, I guess I've learned something new.
-      </p>
-    </Fragment>
+  <!-- Current Bookshelf - Visual Layout -->
+  <section id="bookshelf" class="py-16 md:py-24 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div class="order-2 md:order-1">
+          <img 
+            src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2090&auto=format&fit=crop&ixlib=rb-4.0.3" 
+            alt="Books on shelf" 
+            class="rounded-lg shadow-xl w-full h-auto object-cover"
+          />
+        </div>
+        <div class="order-1 md:order-2">
+          <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">
+            What I'm Reading
+          </h2>
+          <p class="text-lg text-gray-700 dark:text-gray-300 mb-8">
+            Reading has always been an important part of how I learn and explore new ideas. My bookshelf reflects my wide range of interests – from technical topics that help me improve professionally to fiction and other subjects that broaden my perspective.
+          </p>
+          
+          <div class="space-y-6">
+            <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border-l-4 border-blue-500">
+              <h3 class="font-bold text-gray-900 dark:text-white mb-2">Science Fiction</h3>
+              <p class="text-gray-700 dark:text-gray-300">"Project Hail Mary" by Andy Weir, "The Three-Body Problem" by Liu Cixin, "Children of Time" by Adrian Tchaikovsky</p>
+            </div>
+            
+            <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border-l-4 border-green-500">
+              <h3 class="font-bold text-gray-900 dark:text-white mb-2">Technical Reading</h3>
+              <p class="text-gray-700 dark:text-gray-300">"Clean Architecture" by Robert C. Martin, "Designing Data-Intensive Applications" by Martin Kleppmann</p>
+            </div>
+            
+            <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border-l-4 border-amber-500">
+              <h3 class="font-bold text-gray-900 dark:text-white mb-2">Other Interests</h3>
+              <p class="text-gray-700 dark:text-gray-300">"How to Build a Car" by Adrian Newey, "Range" by David Epstein</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
+  <!-- Learning Path - Progress Journey -->
+  <section class="py-16 md:py-24 bg-gray-50 dark:bg-gray-800">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold tracking-tight text-center text-gray-900 dark:text-white mb-12">
+        My Learning Journey
+      </h2>
+      
+      <div class="max-w-3xl mx-auto">
+        <!-- Timeline Component -->
+        <div class="relative border-l-4 border-blue-500 pl-6 space-y-10 ml-6">
+          <!-- Timeline Item 1 -->
+          <div class="relative">
+            <span class="absolute -left-10 flex items-center justify-center w-14 h-14 rounded-full bg-blue-600 text-white font-bold text-xl">1</span>
+            <div class="bg-white dark:bg-gray-700 p-5 rounded-lg shadow-sm">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">DevOps Essentials</h3>
+              <p class="text-gray-700 dark:text-gray-300">CI/CD pipelines, Infrastructure as Code (Terraform, Ansible), container orchestration with Kubernetes</p>
+            </div>
+          </div>
+          
+          <!-- Timeline Item 2 -->
+          <div class="relative">
+            <span class="absolute -left-10 flex items-center justify-center w-14 h-14 rounded-full bg-blue-600 text-white font-bold text-xl">2</span>
+            <div class="bg-white dark:bg-gray-700 p-5 rounded-lg shadow-sm">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Backend Engineering</h3>
+              <p class="text-gray-700 dark:text-gray-300">Distributed systems, API design patterns, microservices architecture, event-driven development</p>
+            </div>
+          </div>
+          
+          <!-- Timeline Item 3 -->
+          <div class="relative">
+            <span class="absolute -left-10 flex items-center justify-center w-14 h-14 rounded-full bg-blue-600 text-white font-bold text-xl">3</span>
+            <div class="bg-white dark:bg-gray-700 p-5 rounded-lg shadow-sm">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Cloud Platforms</h3>
+              <p class="text-gray-700 dark:text-gray-300">AWS core services, Azure fundamentals, multi-cloud strategies</p>
+            </div>
+          </div>
+          
+          <!-- Timeline Item 4 -->
+          <div class="relative">
+            <span class="absolute -left-10 flex items-center justify-center w-14 h-14 rounded-full bg-blue-600 text-white font-bold text-xl">4</span>
+            <div class="bg-white dark:bg-gray-700 p-5 rounded-lg shadow-sm">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Security & Compliance</h3>
+              <p class="text-gray-700 dark:text-gray-300">DevSecOps practices, vulnerability scanning, secrets management, compliance automation</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-12">
+        <a href="/activity" class="inline-flex items-center px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors">
+          See My Current Progress
+          <svg class="w-5 h-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
 
-  <!-- Features3 Widget ************** -->
-
-  <Features3
-    id="future-plans"
-    title="Future Learning Path"
-    subtitle="My roadmap for developing expertise in DevOps and backend engineering"
-    columns={3}
-    defaultIcon="tabler:point-filled"
-    items={[
-      {
-        title: 'DevOps Essentials',
-        description: 'CI/CD pipelines, Infrastructure as Code (Terraform, Ansible), container orchestration with Kubernetes',
-        icon: 'tabler:cloud',
-      },
-      {
-        title: 'Backend Engineering',
-        description: 'Distributed systems, API design patterns, microservices architecture, event-driven development',
-        icon: 'tabler:server',
-      },
-      {
-        title: 'Cloud Platforms',
-        description: 'AWS core services, Azure fundamentals, multi-cloud strategies',
-        icon: 'tabler:cloud-computing',
-      },
-      {
-        title: 'Monitoring & Observability',
-        description: 'Prometheus, Grafana, ELK stack, distributed tracing with Jaeger',
-        icon: 'tabler:chart-line',
-      },
-      {
-        title: 'Database Technologies',
-        description: 'PostgreSQL optimization, NoSQL solutions (MongoDB, Redis), database sharding strategies',
-        icon: 'tabler:database',
-      },
-      {
-        title: 'Security & Compliance',
-        description: 'DevSecOps practices, vulnerability scanning, secrets management, compliance automation',
-        icon: 'tabler:shield',
-      },
-    ]}
-  />
-
-  <!-- Progress CallToAction Widget *********** -->
-
-<CallToAction
-title="Track My Learning Journey"
-subtitle="See what I'm currently working on and the skills I'm developing in real-time."
-actions={[
-  {
-    variant: 'primary',
-    text: 'See My Current Progress',
-    href: '/activity',
-  }
-]}
-/>
-
-  <!-- Content Widget **************** -->
-  <Content
-    id="bookshelf"
-    title="Current Bookshelf"
-    subtitle="A glimpse into what's currently inspiring me"
-    items={[
-      {
-        title: 'Science Fiction',
-        description: '"Project Hail Mary" by Andy Weir, "The Three-Body Problem" by Liu Cixin, "Children of Time" by Adrian Tchaikovsky',
-        icon: 'tabler:books',
-      },
-      {
-        title: 'Technical Reading',
-        description: '"Clean Architecture" by Robert C. Martin, "Designing Data-Intensive Applications" by Martin Kleppmann',
-        icon: 'tabler:code',
-      },
-      {
-        title: 'Other Interests',
-        description: '"How to Build a Car" by Adrian Newey, "Range" by David Epstein',
-        icon: 'tabler:notebook',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2090&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      alt: 'Books on shelf',
-    }}
-  >
-    <Fragment slot="content">
-      <h2 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">What I'm Reading</h2>
-      <p>
-        Books have always been portals to new ideas and perspectives for me. My reading habits reflect my diverse interests and continuous
-        desire to learn across multiple domains. Here's what's currently on my nightstand or in my e-reader.
-      </p>
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <!-- CallToAction Widget *********** -->
-
+  <!-- Call to Action -->
   <CallToAction
-    title="I'm open for work or collaboration"
-    subtitle="Looking for a software engineer who brings both technical expertise and creative perspective? I'm currently open to new opportunities."
+    title="Let's Connect"
+    subtitle="I'm open to new opportunities and always enjoy connecting with others in the tech community. Feel free to reach out if you'd like to collaborate or just chat about shared interests."
     actions={[
       {
         variant: 'primary',
@@ -297,15 +288,14 @@ actions={[
     ]}
   />
 
-  <!-- BlogLatestPost Widget **************** -->
-
+  <!-- Blog Section -->
   <BlogLatestPosts
     id="blog"
     title="Thoughts, Ideas, and Learnings"
-    information={`From technical explorations to thoughts on sci-fi and gaming, my blog is where I share insights across my professional and personal interests. Join me as I connect the dots between technology and imagination.`}
+    information={`Here's where I share thoughts on technology, personal interests, and lessons I've learned along the way. My blog is a mix of technical insights and personal reflections that show both sides of my professional journey.`}
   >
-    <Fragment slot="bg">
+    <div slot="bg">
       <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
+    </div>
   </BlogLatestPosts>
 </Layout>
