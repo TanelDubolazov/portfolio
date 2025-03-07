@@ -1,75 +1,87 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import ContactUs from '~/components/widgets/Contact.astro';
 import Features2 from '~/components/widgets/Features2.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: 'Contact',
+  title: 'Contact Tanel Dubolazov',
+  description: 'Get in touch with Tanel Dubolazov, a DevOps Engineer and Software Developer, for full-time employment opportunities.',
 };
 ---
 
 <Layout metadata={metadata}>
-  <!-- HeroText Widget ******************* -->
-
-  <ContactUs
-    id="form"
-    title="Drop me a messsage!"
-    subtitle="Send me a message here or any of the channels below."
-    inputs={[
-      {
-        type: 'text',
-        name: 'name',
-        label: 'Name',
-      },
-      {
-        type: 'email',
-        name: 'email',
-        label: 'Email',
-      },
+  <!-- Hero Section for Contact -->
+  <CallToAction
+    title="Let's Connect"
+    subtitle="I'm currently looking for full-time DevOps and backend software engineering positions. I'd love to hear about opportunities at your company."
+    actions={[
+      { variant: 'primary', text: 'Email Me', href: 'mailto:Tanel.Dubolazov@gmail.com', target: '_blank' },
+      { text: 'View CV', href: '/cv', target: '_blank' }
     ]}
-    textarea={{
-      label: 'Message',
-    }}
-    disclaimer={{
-      label:
-        'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
-    }}
+    classes={{ container: 'max-w-3xl' }}
   />
 
-  <!-- Features2 Widget ************** -->
-
+  <!-- Primary Contact Methods -->
   <Features2
-  title="Happy to make new connections!"
-  items={[
-    {
-      title: 'LinkedIn',
-      description: '<a href="https://www.linkedin.com/in/tanel-dubolazov" target="_blank" rel="noopener noreferrer">https://www.linkedin.com/in/tanel-dubolazov</a>',
-      icon: 'tabler:brand-linkedin',
-    },
-    {
-      title: 'GitHub',
-      description: '<a href="https://github.com/TanelDubolazov" target="_blank" rel="noopener noreferrer">https://github.com/TanelDubolazov</a>',
-      icon: 'tabler:brand-github',
-    },
-    {
-      title: 'Discord',
-      description: 'taneld',
-      icon: 'tabler:brand-discord',
-    },
-    {
-      title: 'Phone',
-      description: '<a href="tel:+37256994112">+372 56 994 112</a>',
-      icon: 'tabler:headset',
-    },
-    {
-      title: 'Email',
-      description: '<a href="mailto:Tanel.Dubolazov@gmail.com">Tanel.Dubolazov@gmail.com</a>',
-      icon: 'tabler:mail',
-    },
-    {
-      title: 'Location',
-      description: 'Tartu, Estonia',
-      icon: 'tabler:map-pin',
-    },
-  ]}
-/>
+    columns={2}
+    title="Contact Information"
+    subtitle="Reach out to discuss employment opportunities"
+    items={[
+      {
+        title: 'Email',
+        description: '<a href="mailto:Tanel.Dubolazov@gmail.com" class="text-blue-600 dark:text-blue-400 hover:underline">Tanel.Dubolazov@gmail.com</a>',
+        icon: 'tabler:mail',
+      },
+      {
+        title: 'Phone',
+        description: '<a href="tel:+37256994112" class="text-blue-600 dark:text-blue-400 hover:underline">+372 56 994 112</a>',
+        icon: 'tabler:phone',
+      },
+      {
+        title: 'Location',
+        description: 'Tartu, Estonia (Open to relocation)',
+        icon: 'tabler:map-pin',
+      },
+      {
+        title: 'Availability',
+        description: 'Available for interviews and technical assessments',
+        icon: 'tabler:calendar',
+      },
+    ]}
+  />
+
+  <!-- Professional Profiles -->
+  <Features2
+    columns={3}
+    title="Professional Profiles"
+    subtitle="Connect with me professionally and review my work"
+    items={[
+      {
+        title: 'LinkedIn',
+        description: '<a href="https://www.linkedin.com/in/tanel-dubolazov" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">linkedin.com/in/tanel-dubolazov</a>',
+        icon: 'tabler:brand-linkedin',
+      },
+      {
+        title: 'GitHub',
+        description: '<a href="https://github.com/TanelDubolazov" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">github.com/TanelDubolazov</a>',
+        icon: 'tabler:brand-github',
+      },
+      {
+        title: 'Discord',
+        description: 'taneld',
+        icon: 'tabler:brand-discord',
+      },
+    ]}
+  />
+
+  <!-- Final Call to Action -->
+  <CallToAction
+    title="Looking Forward to Connecting"
+    subtitle="I'm currently available for full-time positions in DevOps and backend engineering."
+    actions={[
+      { variant: 'primary', text: 'Email Me', href: 'mailto:Tanel.Dubolazov@gmail.com?subject=Employment%20Opportunity', target: '_blank' },
+      { text: 'View Portfolio', href: '/#projects' }
+    ]}
+    classes={{ container: 'max-w-3xl' }}
+  />
+</Layout>
