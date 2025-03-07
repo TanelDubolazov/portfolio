@@ -98,8 +98,6 @@ Astro **automatically generates** pages from `.astro` files inside: `src/pages/`
 ✏️ **To create a new page**, simply add:
 
 ```
-// src/pages/new-page.astro
----
 title: "New Page"
 description: "This is a new page."
 ---
@@ -110,6 +108,42 @@ description: "This is a new page."
 
 Your new page will be available at **`/new-page`**.
 
+**Navbar navigation** : 
+
+Simply open **`/src/navigation.ts`** and add or remove destinations as shown in the code below : 
+
+
+```
+export const headerData = {
+  links: [
+    {
+      text: 'Home',
+      href: getPermalink('/'),
+    },
+    {
+      text: 'Personal',
+      href: getPermalink('/personal'),
+    },
+    {
+      text: 'CV',
+      href: getPermalink('/cv'),
+    },
+    {
+      text: 'Goals & Activity',
+      href: getPermalink('/activity'),
+    },
+    {
+      text: 'Blog',
+      href: getPermalink('/blog'),
+    },
+    {
+      text: 'Contact',
+      href: getPermalink('/contact'),
+    },
+  ]
+};
+
+```
 
 ### 📰 **Writing Blog Posts**
 
