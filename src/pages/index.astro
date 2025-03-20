@@ -10,7 +10,8 @@ import Stats from '~/components/widgets/Stats.astro';
 
 const metadata = {
   title: 'Tanel Dubolazov - DevOps Engineer & Software Developer',
-  description: 'Professional portfolio of Tanel Dubolazov, a DevOps Engineer and Software Developer with expertise in cloud solutions, automation, and software engineering.',
+  description:
+    'Professional portfolio of Tanel Dubolazov, a DevOps Engineer and Software Developer with expertise in cloud solutions, automation, and software engineering.',
   ogTitle: 'Tanel Dubolazov - DevOps Engineer & Software Developer',
   ogType: 'website',
   ogImage: '~/assets/images/profile-og.jpg',
@@ -34,10 +35,9 @@ const metadata = {
     }}
   >
     <slot slot="subtitle">
-      I'm a software engineer specializing in DevOps practices and cloud infrastructure. 
-      With a background in marketing, I bring a unique perspective to technical projects, 
-      focusing on both functionality and user experience. I excel at optimizing systems, 
-      automating workflows, and building scalable solutions.
+      I'm a software engineer specializing in DevOps practices and cloud infrastructure. With a background in marketing,
+      I bring a unique perspective to technical projects, focusing on both functionality and user experience. I excel at
+      optimizing systems, automating workflows, and building scalable solutions.
     </slot>
   </Hero>
 
@@ -64,20 +64,19 @@ const metadata = {
     <slot slot="content">
       <h2 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-4">About Me</h2>
       <p class="mb-4">
-        Throughout my journey from marketing to e-commerce to software engineering, 
-        I've developed a passion for understanding complex systems and building efficient solutions.
+        Throughout my journey from marketing to e-commerce to software engineering, I've developed a passion for
+        understanding complex systems and building efficient solutions.
       </p>
       <p class="mb-4">
-        I approach technical challenges with curiosity and resilience. 
-        When faced with system failures, I don't just fix the immediate issue - I analyze the root cause 
-        and implement sustainable improvements. This investigative mindset drives my work in DevOps, where 
-        I break down infrastructure into manageable components and design robust automation pipelines.
+        I approach technical challenges with curiosity and resilience. When faced with system failures, I don't just fix
+        the immediate issue - I analyze the root cause and implement sustainable improvements. This investigative
+        mindset drives my work in DevOps, where I break down infrastructure into manageable components and design robust
+        automation pipelines.
       </p>
       <p>
-        Rather than spreading myself thin across every technology, 
-        I focus on strategic learning and adaptability. 
-        I prioritize understanding core concepts that transfer across tools and platforms, 
-        allowing me to quickly master new technologies when needed for specific projects or challenges.
+        Rather than spreading myself thin across every technology, I focus on strategic learning and adaptability. I
+        prioritize understanding core concepts that transfer across tools and platforms, allowing me to quickly master
+        new technologies when needed for specific projects or challenges.
       </p>
     </slot>
     <slot slot="bg">
@@ -104,35 +103,35 @@ const metadata = {
     columns={3}
     defaultIcon="tabler:code"
     items={[
-      { 
+      {
         title: 'Languages',
         description: 'Go, JavaScript, Bash, SQL',
-        icon: 'tabler:code' 
+        icon: 'tabler:code',
       },
-      { 
+      {
         title: 'Cloud & DevOps',
         description: 'Docker, GitHub Actions, Terraform, CI/CD pipelines, Cloud infrastructure',
-        icon: 'tabler:cloud' 
+        icon: 'tabler:cloud',
       },
-      { 
+      {
         title: 'Backend',
         description: 'Node.js, Express.js, RESTful APIs, WebSockets, Microservices',
-        icon: 'tabler:server' 
+        icon: 'tabler:server',
       },
-      { 
+      {
         title: 'Frontend',
         description: 'React.js, HTML5, CSS3, Responsive design',
-        icon: 'tabler:brand-react' 
+        icon: 'tabler:brand-react',
       },
-      { 
+      {
         title: 'Databases',
         description: 'PostgreSQL, MySQL, SQLite, Database optimization',
-        icon: 'tabler:database' 
+        icon: 'tabler:database',
       },
-      { 
+      {
         title: 'Tools & Practices',
         description: 'Git, Agile methodology, Vagrant, Postman, Monitoring, Logging',
-        icon: 'tabler:tools' 
+        icon: 'tabler:tools',
       },
     ]}
     classes={{ container: 'max-w-5xl' }}
@@ -178,7 +177,7 @@ const metadata = {
             </span>
           </p>
         </div>
-        
+
         <div class="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-sm hover:shadow-md transition-shadow">
           <h3 class="text-xl font-bold dark:text-white">Microservices Content Platform</h3>
           <p class="mt-2">
@@ -191,7 +190,7 @@ const metadata = {
             </span>
           </p>
         </div>
-        
+
         <div class="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-sm hover:shadow-md transition-shadow">
           <h3 class="text-xl font-bold dark:text-white">Real-Time-Forum</h3>
           <p class="mt-2">
@@ -205,12 +204,15 @@ const metadata = {
           </p>
         </div>
       </div>
-      
+
       <div class="mt-8">
-        <a href="/activity" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors">
+        <a
+          href="/activity"
+          class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
+        >
           View all projects
           <svg class="w-5 h-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
           </svg>
         </a>
       </div>
@@ -226,7 +228,8 @@ const metadata = {
     title="Professional Experience"
     items={[
       {
-        title: 'Student Developer & Auditor <br /> <span class="font-normal">kood / Jõhvi</span> <br /> <span class="text-sm font-normal">2023 - 2025</span>',
+        title:
+          'Student Developer & Auditor <br /> <span class="font-normal">kood / Jõhvi</span> <br /> <span class="text-sm font-normal">2023 - 2025</span>',
         description: `Developed full-stack applications with a focus on DevOps practices and cloud infrastructure. <br /> 
         Implemented CI/CD pipelines and containerization strategies for project deployments. <br /> 
         Collaborated in Agile teams to deliver complex applications with strict deadlines. <br />
@@ -234,7 +237,8 @@ const metadata = {
         icon: 'tabler:briefcase',
       },
       {
-        title: 'Marketing Specialist <br /> <span class="font-normal">Freelance</span> <br /> <span class="text-sm font-normal">2018 - 2023</span>',
+        title:
+          'Marketing Specialist <br /> <span class="font-normal">Freelance</span> <br /> <span class="text-sm font-normal">2018 - 2023</span>',
         description: `Designed and launched e-commerce platforms using Shopify, including technical customizations. <br /> 
         Developed data-driven marketing campaigns leveraging analytics and automation tools. <br /> 
         Managed database systems for product catalogs and implemented dynamic pricing algorithms. <br />
@@ -251,7 +255,7 @@ const metadata = {
     subtitle="I'm currently available for hire in devops or backend engineering."
     actions={[
       { variant: 'primary', text: 'Contact Me', href: '/contact#form' },
-      { text: 'View Resume', href: '/cv', target: '_blank' }
+      { text: 'View Resume', href: '/cv', target: '_blank' },
     ]}
     classes={{ container: 'max-w-xl' }}
   />

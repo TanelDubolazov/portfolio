@@ -28,7 +28,7 @@ export default defineConfig({
   site: 'https://taneldubolazov.github.io',
   base: '/portfolio',
   // ============================================
-  
+
   output: 'static',
 
   integrations: [

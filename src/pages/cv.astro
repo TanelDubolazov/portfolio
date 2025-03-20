@@ -3,24 +3,18 @@ import Layout from '~/layouts/PageLayout.astro';
 
 const metadata = {
   title: 'A4 CV Print Page',
-  description: "CV page in an official format.",
+  description: 'CV page in an official format.',
 };
 ---
 
-
 <Layout metadata={metadata}>
-  
   <div class="my-4 flex items-center justify-center no-print">
-    <button
-      class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-      onclick="window.print()"
-    >
+    <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" onclick="window.print()">
       Print CV
     </button>
   </div>
 
   <style>
-   
     * {
       box-sizing: border-box;
       margin: 0;
@@ -28,10 +22,9 @@ const metadata = {
     }
 
     body {
-      font-size: 10pt; 
+      font-size: 10pt;
     }
 
-   
     @media print {
       .no-print {
         display: none !important;
@@ -39,16 +32,16 @@ const metadata = {
       body {
         background: #fff !important;
       }
-      
+
       body *:not(.cv-container):not(.cv-container *) {
         display: none !important;
       }
-      
+
       .a4-page {
         page-break-after: avoid;
         page-break-inside: avoid;
       }
-      
+
       section {
         page-break-inside: avoid;
       }
@@ -63,28 +56,27 @@ const metadata = {
     }
 
     .a4-page {
-      width: 210mm;       
-      min-height: 297mm;  
-      height: 297mm;      
+      width: 210mm;
+      min-height: 297mm;
+      height: 297mm;
       background: #fff;
       padding: 10mm;
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-      overflow: hidden;   
-      position: relative; 
-      color: #000;        
+      overflow: hidden;
+      position: relative;
+      color: #000;
     }
 
     @media print {
       .a4-page {
         box-shadow: none;
         width: 100%;
-        height: auto;     
+        height: auto;
         margin: 0;
-        padding: 10mm; 
-        color: #000 !important; 
+        padding: 10mm;
+        color: #000 !important;
       }
     }
-
 
     :global(.dark) .a4-page {
       color: #000;
@@ -97,58 +89,58 @@ const metadata = {
 
     header {
       text-align: center;
-      margin-bottom: 8px; 
+      margin-bottom: 8px;
     }
     h1 {
-      margin-bottom: 5px; 
-      font-size: 14pt;   
-      color: #000;        
+      margin-bottom: 5px;
+      font-size: 14pt;
+      color: #000;
     }
     .contact-info {
       margin-bottom: 8px;
       word-wrap: break-word;
-      color: #000;        
+      color: #000;
     }
     h2 {
-      border-bottom: 1px solid #333; 
+      border-bottom: 1px solid #333;
       padding-bottom: 2px;
       margin-bottom: 4px;
-      margin-top: 6px;    
+      margin-top: 6px;
       font-size: 11pt;
-      color: #000;        
+      color: #000;
     }
     .row {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 3px; 
+      margin-bottom: 3px;
       flex-wrap: wrap;
-      color: #000;        
+      color: #000;
     }
     .row h3 {
       margin: 0;
       font-size: 10pt;
       font-weight: bold;
-      color: #000;        
+      color: #000;
     }
     .date {
       text-align: right;
-      color: #000;        
+      color: #000;
     }
     .repo-link {
       text-align: right;
-      font-size: 9pt;     
+      font-size: 9pt;
       word-break: break-all;
-      color: #000;        
+      color: #000;
     }
     ul {
       padding-left: 13px;
       margin-top: 2px;
-      margin-bottom: 6px; 
-      color: #000;       
+      margin-bottom: 6px;
+      color: #000;
     }
     li {
-      margin-bottom: 2px; 
-      color: #000;        
+      margin-bottom: 2px;
+      color: #000;
     }
     a {
       color: #0066cc;
@@ -158,17 +150,18 @@ const metadata = {
       text-decoration: underline;
     }
     .skills-list {
-      margin-bottom: 3px; 
-      color: #000;        
+      margin-bottom: 3px;
+      color: #000;
     }
-    
-    #projects ul li, #experience ul li {
-      line-height: 1.3;  
+
+    #projects ul li,
+    #experience ul li {
+      line-height: 1.3;
     }
-    
+
     section {
-      margin-bottom: 8px; 
-      color: #000;        
+      margin-bottom: 8px;
+      color: #000;
     }
   </style>
 
@@ -184,9 +177,13 @@ const metadata = {
       <section class="section" id="skills">
         <h2>Skills</h2>
         <div class="skills-list"><strong>Languages:</strong> Go, JavaScript, Bash</div>
-        <div class="skills-list"><strong>Web Technologies:</strong> React.js, Node.js, Express.js, WebSockets, REST API, HTML, CSS</div>
+        <div class="skills-list">
+          <strong>Web Technologies:</strong> React.js, Node.js, Express.js, WebSockets, REST API, HTML, CSS
+        </div>
         <div class="skills-list"><strong>Data:</strong> PostgreSQL, SQLite, MySQL</div>
-        <div class="skills-list"><strong>Tools:</strong> Git, Docker, Vagrant, PM2, Postman, Terraform, Cisco, GitHub Actions</div>
+        <div class="skills-list">
+          <strong>Tools:</strong> Git, Docker, Vagrant, PM2, Postman, Terraform, Cisco, GitHub Actions
+        </div>
       </section>
 
       <section class="section" id="education">
@@ -208,9 +205,17 @@ const metadata = {
           </div>
         </div>
         <ul>
-          <li>Team project to develop a Facebook-like social network with authentication, posts, followers, and chat.</li>
-          <li>Built the frontend in React, integrating with an existing Go-based REST API and WebSockets for real-time messaging.</li>
-          <li>Took full-stack responsibility despite frontend not being my primary focus, implementing backend modifications where needed.</li>
+          <li>
+            Team project to develop a Facebook-like social network with authentication, posts, followers, and chat.
+          </li>
+          <li>
+            Built the frontend in React, integrating with an existing Go-based REST API and WebSockets for real-time
+            messaging.
+          </li>
+          <li>
+            Took full-stack responsibility despite frontend not being my primary focus, implementing backend
+            modifications where needed.
+          </li>
         </ul>
 
         <div class="row">

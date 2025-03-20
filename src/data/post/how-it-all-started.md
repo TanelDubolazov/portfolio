@@ -14,7 +14,7 @@ metadata:
 
 It was April 2023, and I had been seeing that Kood/Jõhvi ad everywhere for months. At first, I thought it was just another online bootcamp, and I never really believed in those. I’m not sure why I opened the ad, but I’m glad I did. I read a little about the program, and it actually looked legit. The promise of becoming a software engineer in 18 months and a guaranteed job seemed too good to be true, so I asked around.
 
-Everyone who had any experience with Kood/Jõhvi only had good things to say. So I figured, what do I have to lose, right?  
+Everyone who had any experience with Kood/Jõhvi only had good things to say. So I figured, what do I have to lose, right?
 
 ## Did I really get in?
 
