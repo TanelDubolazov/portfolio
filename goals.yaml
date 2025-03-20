@@ -25,86 +25,86 @@
 # Please note that current marker only works if completion is set false
 
 goals:
-  - project: "kood/johvi"
+  - project: 'kood/johvi'
     milestones:
-      - name: "Go Completion"
-        date: "Feb 25, 2025"
+      - name: 'Go Completion'
+        date: 'Feb 25, 2025'
         completed: true
-      - name: "JavaScript Completion"
-        date: "Mar 15, 2025"
+      - name: 'JavaScript Completion'
+        date: 'Mar 15, 2025'
         completed: true
-      - name: "DevOps Completion"
-        date: "Expected Apr 2025"
+      - name: 'DevOps Completion'
+        date: 'Expected Apr 2025'
         completed: false
         current: true
 
-  - project: "DevOps focus"
+  - project: 'DevOps focus'
     milestones:
-      - name: "Kood/johvi DevOps module"
-        date: "Expected Apr 2025"
+      - name: 'Kood/johvi DevOps module'
+        date: 'Expected Apr 2025'
         completed: false
         current: true
         steps:
-          - name: "Deep-in-net"
+          - name: 'Deep-in-net'
             completed: true
-          - name: "Deep-in-system"
+          - name: 'Deep-in-system'
             completed: true
-          - name: "crud-master"
+          - name: 'crud-master'
             completed: true
-          - name: "play-with-containers"
+          - name: 'play-with-containers'
             completed: true
-          - name: "orchestrator"
+          - name: 'orchestrator'
             completed: false
             current: true
-          - name: "cloud-design"
+          - name: 'cloud-design'
             completed: false
-          - name: "code-keeper"
+          - name: 'code-keeper'
             completed: false
-      - name: "Online Resume/Blog CI/CD"
-        date: "Feb 26, 2025"
+      - name: 'Online Resume/Blog CI/CD'
+        date: 'Feb 26, 2025'
         completed: true
         current: false
-      - name: "Terraform associate exam 003"
-        date: "Expected March 2025"
+      - name: 'Terraform associate exam 003'
+        date: 'Expected March 2025'
         completed: false
         current: true
         steps:
-          - name: "Learning"
+          - name: 'Learning'
             completed: false
             current: true
-          - name: "Using Terraform"
+          - name: 'Using Terraform'
             completed: true
-          - name: "Trial exam"
+          - name: 'Trial exam'
             completed: false
-          - name: "Full exam"
+          - name: 'Full exam'
             completed: false
-      - name: "Kubernetes Certification (CKA or CKAD)"
-        date: "Expected May 2025"
+      - name: 'Kubernetes Certification (CKA or CKAD)'
+        date: 'Expected May 2025'
         completed: false
         steps:
-          - name: "Cluster setup & management"
+          - name: 'Cluster setup & management'
             completed: false
-          - name: "RBAC & security"
+          - name: 'RBAC & security'
             completed: false
-          - name: "Pod scheduling & networking"
+          - name: 'Pod scheduling & networking'
             completed: false
-          - name: "Logging, monitoring & troubleshooting"
+          - name: 'Logging, monitoring & troubleshooting'
             completed: false
             current: false
-          - name: "Trial exam"
+          - name: 'Trial exam'
             completed: false
-          - name: "Full exam"
+          - name: 'Full exam'
             completed: false
-      - name: "GitOps & Infrastructure as Code (IaC) Project"
-        date: "Expected June 2025"
+      - name: 'GitOps & Infrastructure as Code (IaC) Project'
+        date: 'Expected June 2025'
         completed: false
         steps:
-          - name: "Advanced GitOps principles"
+          - name: 'Advanced GitOps principles'
             completed: false
-          - name: "Setup ArgoCD/Flux"
+          - name: 'Setup ArgoCD/Flux'
             completed: false
-          - name: "Automate deployments"
+          - name: 'Automate deployments'
             completed: false
             current: false
-          - name: "Production-ready infrastructure setup"
+          - name: 'Production-ready infrastructure setup'
             completed: false

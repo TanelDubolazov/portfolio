@@ -4,7 +4,7 @@ This project is built using **[Astro 5.0](https://astro.build/) + [Tailwind CSS]
 
 🔗 **AstroWind Source**: [onwidget/astrowind](https://github.com/onwidget/astrowind)
 
-----------
+---
 
 ## 🌟 Features
 
@@ -18,21 +18,20 @@ This project is built using **[Astro 5.0](https://astro.build/) + [Tailwind CSS]
 ## 📌 Getting Started
 
 1.  **Clone the repository**
-    
 2.  **Install dependencies**
 
-    `npm install` 
-    
+    `npm install`
+
 3.  **Start local development**
-    
-    `npm run dev` 
-    
+
+    `npm run dev`
+
 4.  **Build for production**
 
-    `npm run build` 
-    
+    `npm run build`
+
 5.  **Preview the build**
-    
+
     `npm run preview`
 
 ## 📝 Customization Guide
@@ -60,12 +59,12 @@ The **Goals & Milestones** section is dynamically loaded from `goals.yaml` locat
 
 🔹 **Steps Icons**:
 
--   ✅ `✔` (Completed)
--   🚧 `🚧` (In Progress)
--   ⏳ `⏳` (Planned)
+- ✅ `✔` (Completed)
+- 🚧 `🚧` (In Progress)
+- ⏳ `⏳` (Planned)
 
-  **Github public projects** in the activity are populated through github api.
-  `src/pages/activity.astro` expects .env in root with your github username and access token.
+**Github public projects** in the activity are populated through github api.
+`src/pages/activity.astro` expects .env in root with your github username and access token.
 
 **.env.example** has been provided.
 
@@ -78,22 +77,21 @@ GITHUB_TOKEN=add_your_github_token
 GITHUB_USERNAME=your_github_username
 ```
 
-
 ### ✍ **Updating Signature**
 
 Upload your **signature** in:
-`src/assets/signature.jpg` 
+`src/assets/signature.jpg`
 
-Replace this file to change the signature displayed on the site or replace it 
-with any logo logo in : `src/components/Logo.astro` 
+Replace this file to change the signature displayed on the site or replace it
+with any logo logo in : `src/components/Logo.astro`
 
 ### 📄 **Managing Pages**
 
-Astro **automatically generates** pages from `.astro` files inside: `src/pages/` 
+Astro **automatically generates** pages from `.astro` files inside: `src/pages/`
 
--   `/index.astro` → Homepage
--   `/about.astro` → About page
--   `/contact.astro` → Contact form
+- `/index.astro` → Homepage
+- `/about.astro` → About page
+- `/contact.astro` → Contact form
 
 ✏️ **To create a new page**, simply add:
 
@@ -108,10 +106,9 @@ description: "This is a new page."
 
 Your new page will be available at **`/new-page`**.
 
-**Navbar navigation** : 
+**Navbar navigation** :
 
-Simply open **`/src/navigation.ts`** and add or remove destinations as shown in the code below : 
-
+Simply open **`/src/navigation.ts`** and add or remove destinations as shown in the code below :
 
 ```
 export const headerData = {
@@ -147,7 +144,7 @@ export const headerData = {
 
 ### 📰 **Writing Blog Posts**
 
-Blog posts are stored in:  `src/data/post/` 
+Blog posts are stored in: `src/data/post/`
 
 Write posts in Markdown (`.md`) or MDX (`.mdx`):
 
@@ -166,9 +163,9 @@ This is my first blog post using Astro 🚀.
 
 📌 **Blog Features**:
 
--   Auto-generates RSS feed
--   Supports **Categories & Tags**
--   Uses **Markdown & MDX** for easy writing
+- Auto-generates RSS feed
+- Supports **Categories & Tags**
+- Uses **Markdown & MDX** for easy writing
 
 ## 🔗 Credits & License
 

@@ -11,53 +11,48 @@ const githubUsername = import.meta.env.GITHUB_USERNAME;
 
 // Helper function to determine badge color
 const getBadgeColor = (item) => {
-  if (item.completed) return "bg-emerald-500";
-  if (item.current) return "bg-amber-500";
-  return "bg-slate-400";
+  if (item.completed) return 'bg-emerald-500';
+  if (item.current) return 'bg-amber-500';
+  return 'bg-slate-400';
 };
 
 // Helper function to get status text
 const getStatusText = (item) => {
-  if (item.completed) return "Completed";
-  if (item.current) return "In Progress";
-  return "Planned";
+  if (item.completed) return 'Completed';
+  if (item.current) return 'In Progress';
+  return 'Planned';
 };
 
 // Helper function to determine step icon
 const getStepIcon = (step) => {
   if (step.completed) return '✔'; // Completed
-  if (step.current) return '🛠️';   // Currently working on
-  return '⏳';                     // Planned (Not started)
+  if (step.current) return '🛠️'; // Currently working on
+  return '⏳'; // Planned (Not started)
 };
 
 // Fetch GitHub repositories
-const res = await fetch(
-  `https://api.github.com/users/${githubUsername}/repos?sort=updated&per_page=9`,
-  {
-    headers: {
-      Accept: 'application/vnd.github.v3+json',
-      Authorization: `Bearer ${token}`,
-    },
-  }
-);
+const res = await fetch(`https://api.github.com/users/${githubUsername}/repos?sort=updated&per_page=9`, {
+  headers: {
+    Accept: 'application/vnd.github.v3+json',
+    Authorization: `Bearer ${token}`,
+  },
+});
 const allRepos = await res.json();
-const repos = allRepos.sort(
-  (a, b) => new Date(b.pushed_at).valueOf() - new Date(a.pushed_at).valueOf()
-);
+const repos = allRepos.sort((a, b) => new Date(b.pushed_at).valueOf() - new Date(a.pushed_at).valueOf());
 
 // Load dynamic goals from YAML file
 const file = fs.readFileSync('./goals.yaml', 'utf8');
 const { goals } = yaml.parse(file);
 
 // Calculate progress for each goal
-const goalsWithProgress = goals.map(goal => {
+const goalsWithProgress = goals.map((goal) => {
   const totalMilestones = goal.milestones.length;
-  const completedMilestones = goal.milestones.filter(ms => ms.completed).length;
+  const completedMilestones = goal.milestones.filter((ms) => ms.completed).length;
   const progressPercent = Math.round((completedMilestones / totalMilestones) * 100);
-  
+
   return {
     ...goal,
-    progress: progressPercent
+    progress: progressPercent,
   };
 });
 
@@ -77,79 +72,103 @@ const metadata = {
   <!-- Hero Section -->
   <section class="relative py-20 bg-gradient-to-b from-blue-600 to-blue-800 text-white">
     <div class="container mx-auto px-4 text-center">
-      <h1 class="text-5xl font-bold tracking-tight mb-6">
-        🚀 Projects & Goals
-      </h1>
+      <h1 class="text-5xl font-bold tracking-tight mb-6">🚀 Projects & Goals</h1>
       <p class="max-w-2xl mx-auto text-xl font-light">
         Tracking my progress on public projects and professional development milestones.
       </p>
     </div>
-    <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-100 to-transparent dark:from-gray-900"></div>
+    <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-100 to-transparent dark:from-gray-900">
+    </div>
   </section>
 
   <!-- GitHub Repos Section -->
   <section class="py-20 bg-gray-100 dark:bg-gray-900">
     <div class="container mx-auto px-4">
       <div class="max-w-3xl mx-auto text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-          📌 Recent GitHub Activity
-        </h2>
-        <p class="text-gray-600 dark:text-gray-400 text-lg">
-          My latest code contributions and project updates
-        </p>
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">📌 Recent GitHub Activity</h2>
+        <p class="text-gray-600 dark:text-gray-400 text-lg">My latest code contributions and project updates</p>
         <p class="text-sm text-gray-500 dark:text-gray-500 mt-2">
-          <i>Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</i>
+          <i
+            >Last updated: {
+              new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+            }</i
+          >
         </p>
       </div>
 
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {repos.map((repo) => (
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:shadow-xl hover:translate-y-[-5px]">
-            <div class="p-6">
-              <div class="flex items-center mb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                </svg>
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white truncate">
-                  {repo.name}
-                </h3>
+        {
+          repos.map((repo) => (
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:shadow-xl hover:translate-y-[-5px]">
+              <div class="p-6">
+                <div class="flex items-center mb-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 text-blue-500 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                    />
+                  </svg>
+                  <h3 class="text-lg font-semibold text-gray-900 dark:text-white truncate">{repo.name}</h3>
+                </div>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  <span class="inline-flex items-center rounded-full bg-blue-100 dark:bg-blue-900 px-2 py-1 text-xs font-medium text-blue-700 dark:text-blue-300">
+                    <svg class="mr-1 h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    Updated {new Date(repo.pushed_at).toLocaleDateString()}
+                  </span>
+                </p>
+                <p class="text-gray-700 dark:text-gray-300 mt-2 line-clamp-2 h-12">
+                  {repo.description || 'No description provided.'}
+                </p>
               </div>
-              <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                <span class="inline-flex items-center rounded-full bg-blue-100 dark:bg-blue-900 px-2 py-1 text-xs font-medium text-blue-700 dark:text-blue-300">
-                  <svg class="mr-1 h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+              <div class="px-6 py-4 bg-gray-50 dark:bg-gray-700 flex justify-between items-center">
+                <div class="flex items-center text-xs text-gray-500 dark:text-gray-400">
+                  <span class="flex items-center mr-3">
+                    <svg class="w-4 h-4 mr-1" viewBox="0 0 16 16" fill="currentColor">
+                      <path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z" />
+                    </svg>
+                    {repo.stargazers_count}
+                  </span>
+                  <span class="flex items-center">
+                    <svg class="w-4 h-4 mr-1" viewBox="0 0 16 16" fill="currentColor">
+                      <path
+                        fill-rule="evenodd"
+                        d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                      />
+                    </svg>
+                    {repo.forks_count}
+                  </span>
+                </div>
+                <a
+                  href={repo.html_url}
+                  class="text-blue-600 dark:text-blue-400 font-medium hover:underline inline-flex items-center"
+                >
+                  View on GitHub
+                  <svg class="w-4 h-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path
+                      fill-rule="evenodd"
+                      d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                    />
                   </svg>
-                  Updated {new Date(repo.pushed_at).toLocaleDateString()}
-                </span>
-              </p>
-              <p class="text-gray-700 dark:text-gray-300 mt-2 line-clamp-2 h-12">
-                {repo.description || 'No description provided.'}
-              </p>
-            </div>
-            <div class="px-6 py-4 bg-gray-50 dark:bg-gray-700 flex justify-between items-center">
-              <div class="flex items-center text-xs text-gray-500 dark:text-gray-400">
-                <span class="flex items-center mr-3">
-                  <svg class="w-4 h-4 mr-1" viewBox="0 0 16 16" fill="currentColor">
-                    <path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z" />
-                  </svg>
-                  {repo.stargazers_count}
-                </span>
-                <span class="flex items-center">
-                  <svg class="w-4 h-4 mr-1" viewBox="0 0 16 16" fill="currentColor">
-                    <path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z" />
-                  </svg>
-                  {repo.forks_count}
-                </span>
+                </a>
               </div>
-              <a href={repo.html_url} class="text-blue-600 dark:text-blue-400 font-medium hover:underline inline-flex items-center">
-                View on GitHub
-                <svg class="w-4 h-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-              </a>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
   </section>
@@ -158,105 +177,126 @@ const metadata = {
   <section class="py-20 bg-white dark:bg-gray-900">
     <div class="container mx-auto px-4">
       <div class="max-w-3xl mx-auto text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-          🎯 Professional Goals
-        </h2>
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">🎯 Professional Goals</h2>
         <p class="text-gray-600 dark:text-gray-400 text-lg">
           A roadmap of my current projects and development milestones
         </p>
       </div>
 
       <div class="space-y-8 max-w-4xl mx-auto">
-        {goalsWithProgress.map((goal) => (
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
-            <details class="group" open>
-              <summary class="cursor-pointer p-6 flex justify-between items-center">
-                <div class="flex-1">
-                  <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">
-                    {goal.project}
-                  </h3>
-                  <div class="mt-4 w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                    <div class="bg-blue-600 h-2.5 rounded-full" style={`width: ${goal.progress}%`}></div>
-                  </div>
-                  <div class="flex justify-between mt-2 text-sm text-gray-600 dark:text-gray-400">
-                    <span>{goal.progress}% complete</span>
-                    <span>{goal.milestones.filter(ms => ms.completed).length} of {goal.milestones.length} milestones</span>
-                  </div>
-                </div>
-                <div class="ml-4 flex-shrink-0">
-                  <svg class="w-6 h-6 text-gray-500 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </div>
-              </summary>
-              
-              <div class="px-6 pb-6 pt-2">
-                <div class="relative border-l-4 border-blue-500 pl-6 space-y-6">
-                  {goal.milestones.map((ms, mIndex) => (
-                    <div class="relative">
-                      <span class={`absolute -left-6 flex items-center justify-center w-12 h-12 rounded-full ${getBadgeColor(ms)} text-white`}>
-                        <span class="text-lg font-bold">{mIndex + 1}</span>
-                      </span>
-                      <div class={`ml-8 bg-gray-50 dark:bg-gray-700 p-5 rounded-lg shadow-sm border-l-4 ${
-                        ms.completed ? "border-emerald-500" : 
-                        ms.current ? "border-amber-500" : 
-                        "border-slate-400"
-                      }`}>
-                        <div class="flex justify-between items-start">
-                          <div>
-                            <h4 class="text-lg font-medium text-gray-900 dark:text-white">
-                              {ms.name}
-                            </h4>
-                            <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                              Target date: {formatDate(ms.date)}
-                            </p>
-                          </div>
-                          <span class={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                            ms.completed ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200" : 
-                            ms.current ? "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200" : 
-                            "bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-200"
-                          }`}>
-                            {getStatusText(ms)}
-                          </span>
-                        </div>
-
-                        {ms.steps && ms.steps.length > 0 && (
-                          <div class="mt-4">
-                            <p class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Tasks:</p>
-                            <ul class="space-y-2 text-sm">
-                              {ms.steps.map((step) => (
-                                <li class={`flex items-center p-2 rounded-md ${
-                                  step.completed ? "bg-emerald-50 dark:bg-emerald-900/20" : 
-                                  step.current ? "bg-amber-50 dark:bg-amber-900/20" : 
-                                  "bg-gray-100 dark:bg-gray-800"
-                                }`}>
-                                  <span class={`inline-flex items-center justify-center w-6 h-6 mr-3 rounded-full ${
-                                    step.completed ? "bg-emerald-500" : 
-                                    step.current ? "bg-amber-500" : 
-                                    "bg-gray-400"
-                                  } text-white`}>
-                                    {getStepIcon(step)}
-                                  </span>
-                                  <span class={`${
-                                    step.completed ? "text-emerald-700 dark:text-emerald-300" : 
-                                    step.current ? "text-amber-700 dark:text-amber-300" : 
-                                    "text-gray-700 dark:text-gray-300"
-                                  }`}>
-                                    {step.name}
-                                  </span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-                      </div>
+        {
+          goalsWithProgress.map((goal) => (
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+              <details class="group" open>
+                <summary class="cursor-pointer p-6 flex justify-between items-center">
+                  <div class="flex-1">
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">{goal.project}</h3>
+                    <div class="mt-4 w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                      <div class="bg-blue-600 h-2.5 rounded-full" style={`width: ${goal.progress}%`} />
                     </div>
-                  ))}
+                    <div class="flex justify-between mt-2 text-sm text-gray-600 dark:text-gray-400">
+                      <span>{goal.progress}% complete</span>
+                      <span>
+                        {goal.milestones.filter((ms) => ms.completed).length} of {goal.milestones.length} milestones
+                      </span>
+                    </div>
+                  </div>
+                  <div class="ml-4 flex-shrink-0">
+                    <svg
+                      class="w-6 h-6 text-gray-500 group-open:rotate-180 transition-transform"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </summary>
+
+                <div class="px-6 pb-6 pt-2">
+                  <div class="relative border-l-4 border-blue-500 pl-6 space-y-6">
+                    {goal.milestones.map((ms, mIndex) => (
+                      <div class="relative">
+                        <span
+                          class={`absolute -left-6 flex items-center justify-center w-12 h-12 rounded-full ${getBadgeColor(ms)} text-white`}
+                        >
+                          <span class="text-lg font-bold">{mIndex + 1}</span>
+                        </span>
+                        <div
+                          class={`ml-8 bg-gray-50 dark:bg-gray-700 p-5 rounded-lg shadow-sm border-l-4 ${
+                            ms.completed ? 'border-emerald-500' : ms.current ? 'border-amber-500' : 'border-slate-400'
+                          }`}
+                        >
+                          <div class="flex justify-between items-start">
+                            <div>
+                              <h4 class="text-lg font-medium text-gray-900 dark:text-white">{ms.name}</h4>
+                              <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                                Target date: {formatDate(ms.date)}
+                              </p>
+                            </div>
+                            <span
+                              class={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                                ms.completed
+                                  ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200'
+                                  : ms.current
+                                    ? 'bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200'
+                                    : 'bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-200'
+                              }`}
+                            >
+                              {getStatusText(ms)}
+                            </span>
+                          </div>
+
+                          {ms.steps && ms.steps.length > 0 && (
+                            <div class="mt-4">
+                              <p class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Tasks:</p>
+                              <ul class="space-y-2 text-sm">
+                                {ms.steps.map((step) => (
+                                  <li
+                                    class={`flex items-center p-2 rounded-md ${
+                                      step.completed
+                                        ? 'bg-emerald-50 dark:bg-emerald-900/20'
+                                        : step.current
+                                          ? 'bg-amber-50 dark:bg-amber-900/20'
+                                          : 'bg-gray-100 dark:bg-gray-800'
+                                    }`}
+                                  >
+                                    <span
+                                      class={`inline-flex items-center justify-center w-6 h-6 mr-3 rounded-full ${
+                                        step.completed
+                                          ? 'bg-emerald-500'
+                                          : step.current
+                                            ? 'bg-amber-500'
+                                            : 'bg-gray-400'
+                                      } text-white`}
+                                    >
+                                      {getStepIcon(step)}
+                                    </span>
+                                    <span
+                                      class={`${
+                                        step.completed
+                                          ? 'text-emerald-700 dark:text-emerald-300'
+                                          : step.current
+                                            ? 'text-amber-700 dark:text-amber-300'
+                                            : 'text-gray-700 dark:text-gray-300'
+                                      }`}
+                                    >
+                                      {step.name}
+                                    </span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </details>
-          </div>
-        ))}
+              </details>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -266,11 +306,20 @@ const metadata = {
     <div class="container mx-auto px-4 text-center">
       <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Interested in collaborating?</h2>
       <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8">
-        I'm always open to interesting projects and collaborations. Feel free to reach out if you'd like to work together!
+        I'm always open to interesting projects and collaborations. Feel free to reach out if you'd like to work
+        together!
       </p>
-      <a href="mailto:Tanel.Dubolazov@gmail.com" class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors">
+      <a
+        href="mailto:Tanel.Dubolazov@gmail.com"
+        class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
+      >
         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+          ></path>
         </svg>
         Get in touch
       </a>
@@ -283,7 +332,7 @@ const metadata = {
   document.addEventListener('DOMContentLoaded', () => {
     // Make sure all details elements for completed goals are closed by default
     const goalDetails = document.querySelectorAll('details');
-    goalDetails.forEach(detail => {
+    goalDetails.forEach((detail) => {
       // Keep only the first details open by default
       if (detail !== goalDetails[0]) {
         detail.removeAttribute('open');
