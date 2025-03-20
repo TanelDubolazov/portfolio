@@ -22,6 +22,13 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
   hasExternalScripts ? (Array.isArray(items) ? items.map((item) => item()) : [items()]) : [];
 
 export default defineConfig({
+  // ============================================
+  // GitHub Pages Configuration
+  // ============================================
+  site: 'https://taneldubolazov.github.io',
+  base: '/portfolio',
+  // ============================================
+  
   output: 'static',
 
   integrations: [
