@@ -23,10 +23,10 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
 
 export default defineConfig({
   // ============================================
-  // GitHub Pages Configuration
+  // AWS S3 + CloudFront
   // ============================================
-  site: 'https://taneldubolazov.github.io',
-  base: '/portfolio',
+  site: 'https://tanel.dev',
+  base: '/',
   // ============================================
 
   output: 'static',

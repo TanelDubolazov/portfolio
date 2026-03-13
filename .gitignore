@@ -23,10 +23,20 @@ pnpm-lock.yaml
 
 .astro
 
+# Generated data (rebuilt by GitHub Actions / fetch script)
+src/data/github-activity.json
+
+# Original cert files (clean copies live in public/certs/)
+certs/
+
+# Cert PDFs (deployed from local build, not needed in git)
+public/certs/
+
 #Terraform
-/terraform
-terraform.tfvars
-variables.tf
-main.tf
+infra/.terraform/
+infra/*.tfstate
+infra/*.tfstate.backup
+infra/.terraform.lock.hcl
+infra/terraform.tfvars
 
 .env

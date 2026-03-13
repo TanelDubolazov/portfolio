@@ -15,7 +15,7 @@ export const headerData = {
       href: getPermalink('/cv'),
     },
     {
-      text: 'Goals & Activity',
+      text: 'Projects',
       href: getPermalink('/activity'),
     },
     {

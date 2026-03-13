@@ -13,7 +13,7 @@ This project is built using **[Astro 5.0](https://astro.build/) + [Tailwind CSS]
 ✅ **Dynamic Pages**: Automatically generates pages from `.astro` and `.md` files.  
 ✅ **Customizable Goals Page**: Easily modify milestones & goals via `goals.yaml`.  
 ✅ **Blog System**: Write posts in Markdown with built-in RSS feed & categories.  
-✅ **Deploy Anywhere**: Works on **Netlify, Vercel, and GitHub Pages**.
+✅ **Deploy Anywhere**: Deployed to **AWS S3**.
 
 ## 📌 Getting Started
 

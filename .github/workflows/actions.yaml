@@ -1,15 +1,14 @@
-name: Build and Deploy
+name: Build & Deploy to S3
 
 on:
-  # Trigger on any push to any branch
   push:
-  # Allow manual trigger
+    branches: [master]
+  schedule:
+    - cron: '0 6 * * *'   # refresh GitHub activity daily
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 jobs:
   build-and-deploy:
@@ -17,32 +16,37 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           cache: npm
-      
+
       - name: Install dependencies
         run: npm ci
-      
-      - name: Debug info
-        run: |
-          echo "Branch: ${{ github.ref }}"
-          echo "Repository: ${{ github.repository }}"
-      
-      - name: Build with Astro
+
+      - name: Fetch GitHub activity
+        run: node scripts/fetch-github-activity.mjs
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_USERNAME: TanelDubolazov
+
+      - name: Build
         run: npm run build
-      
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-      
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          path: ./dist
-      
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-north-1
+
+      - name: Deploy to S3
+        run: aws s3 sync dist/ s3://tanel.dev --delete --exclude "certs/*"
+
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id E17VEX1N16EDLG \
+            --paths "/*"
