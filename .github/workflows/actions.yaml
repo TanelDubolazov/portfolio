@@ -42,14 +42,54 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-north-1
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-
-      - name: Terraform Init & Apply
-        working-directory: infra
+      - name: Ensure CloudFront URL rewrite function
         run: |
-          terraform init
-          terraform apply -auto-approve
+          FUNC_NAME="tanel-dev-url-rewrite"
+          FUNC_CODE='function handler(event) { var r = event.request; var u = r.uri; if (!u.includes(".")) { if (!u.endsWith("/")) u += "/"; u += "index.html"; } r.uri = u; return r; }'
+
+          # Create or update the function
+          ETAG=$(aws cloudfront describe-function --name "$FUNC_NAME" --query "ETag" --output text 2>/dev/null || true)
+          if [ "$ETAG" = "" ] || [ "$ETAG" = "None" ]; then
+            echo "$FUNC_CODE" | aws cloudfront create-function \
+              --name "$FUNC_NAME" --runtime cloudfront-js-2.0 \
+              --function-config '{"Comment":"URL rewrite","Runtime":"cloudfront-js-2.0"}' \
+              --function-code fileb:///dev/stdin
+            ETAG=$(aws cloudfront describe-function --name "$FUNC_NAME" --query "ETag" --output text)
+          fi
+
+          # Publish
+          aws cloudfront publish-function --name "$FUNC_NAME" --if-match "$ETAG" 2>/dev/null || true
+
+          # Get function ARN
+          FUNC_ARN=$(aws cloudfront describe-function --name "$FUNC_NAME" --query "FunctionSummary.FunctionMetadata.FunctionARN" --output text)
+
+          # Check if already attached to distribution
+          DIST_ID="E17VEX1N16EDLG"
+          CURRENT=$(aws cloudfront get-distribution-config --id "$DIST_ID")
+          ATTACHED=$(echo "$CURRENT" | python3 -c "
+          import sys, json
+          cfg = json.load(sys.stdin)
+          items = cfg['DistributionConfig']['DefaultCacheBehavior'].get('FunctionAssociations', {}).get('Items', [])
+          print('yes' if any(i['FunctionARN'] == '$FUNC_ARN' for i in items) else 'no')
+          ")
+
+          if [ "$ATTACHED" = "no" ]; then
+            DIST_ETAG=$(echo "$CURRENT" | python3 -c "import sys,json; print(json.load(sys.stdin)['ETag'])")
+            echo "$CURRENT" | python3 -c "
+          import sys, json
+          data = json.load(sys.stdin)
+          dcb = data['DistributionConfig']['DefaultCacheBehavior']
+          dcb['FunctionAssociations'] = {
+            'Quantity': 1,
+            'Items': [{'FunctionARN': '$FUNC_ARN', 'EventType': 'viewer-request'}]
+          }
+          json.dump(data['DistributionConfig'], sys.stdout)
+          " > /tmp/dist-config.json
+            aws cloudfront update-distribution --id "$DIST_ID" --if-match "$DIST_ETAG" --distribution-config file:///tmp/dist-config.json
+            echo "Function attached to distribution"
+          else
+            echo "Function already attached"
+          fi
 
       - name: Deploy to S3
         run: aws s3 sync dist/ s3://tanel.dev --delete --exclude "certs/*"
