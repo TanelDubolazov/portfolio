@@ -1,7 +1,7 @@
 MIT License
 
 Copyright (c) 2023 onWidget
-Copyright (c) 2025 Tanel Dubolazov
+Copyright (c) 2025-2026 Tanel Dubolazov
 
 This project is based on AstroWind but includes modifications by Tanel Dubolazov.
 
