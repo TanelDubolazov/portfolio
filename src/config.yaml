@@ -9,9 +9,9 @@ site:
 # Default SEO metadata
 metadata:
   title:
-    default: tanel.dev
-    template: '%s — AstroWind'
-  description: 'Personal portfolio of Tanel Dubolazov, focused on software engineering and DevOps work.'
+    default: 'Tanel Dubolazov | Software Developer'
+    template: '%s | Tanel Dubolazov'
+  description: 'Personal portfolio of Tanel Dubolazov, software developer with a full-stack background and DevOps focus.'
   robots:
     index: true
     follow: true
@@ -23,8 +23,8 @@ metadata:
         height: 628
     type: website
   twitter:
-    handle: '@onwidget'
-    site: '@onwidget'
+    handle: '@tanel_dev'
+    site: '@tanel_dev'
     cardType: summary_large_image
 
 i18n:
