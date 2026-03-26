@@ -136,26 +136,16 @@ const metadata = {
         <div class="container mx-auto px-4 max-w-4xl">
           <h2 class="text-xl font-semibold text-gray-900 mb-6">Recently active</h2>
 
+          {/* Public repos - always visible */}
           <div class="grid gap-3 sm:grid-cols-2">
-            {ghData.recentRepos.map((repo) => (
-              <div class={`group rounded-lg border p-4 transition-colors ${
-                repo.isPrivate
-                  ? 'border-gray-200 bg-gray-50'
-                  : 'border-gray-200 hover:border-blue-300'
-              }`}>
+            {ghData.recentRepos.filter((r) => !r.isPrivate).map((repo) => (
+              <div class="group rounded-lg border p-4 transition-colors border-gray-200 hover:border-blue-300">
                 <div class="flex items-start justify-between gap-2">
                   <div class="min-w-0">
-                    {repo.isPrivate ? (
-                      <span class="inline-flex items-center gap-1.5 text-sm font-medium text-gray-400">
-                        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 16 16"><path d="M4 4a4 4 0 0 1 8 0v2h.25c.966 0 1.75.784 1.75 1.75v5.5A1.75 1.75 0 0 1 12.25 15h-8.5A1.75 1.75 0 0 1 2 13.25v-5.5C2 6.784 2.784 6 3.75 6H4Zm8.25 3.5h-8.5a.25.25 0 0 0-.25.25v5.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-5.5a.25.25 0 0 0-.25-.25ZM10.5 6V4a2.5 2.5 0 1 0-5 0v2Z" /></svg>
-                        Private project
-                      </span>
-                    ) : (
-                      <a href={repo.url} target="_blank" rel="noopener noreferrer"
-                         class="text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors truncate block">
-                        {repo.name}
-                      </a>
-                    )}
+                    <a href={repo.url} target="_blank" rel="noopener noreferrer"
+                       class="text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors truncate block">
+                      {repo.name}
+                    </a>
                     {repo.description && (
                       <p class="text-xs text-gray-500 mt-1 line-clamp-1">{repo.description}</p>
                     )}
@@ -164,8 +154,6 @@ const metadata = {
                     {timeAgo(repo.pushedAt)}
                   </span>
                 </div>
-
-                {/* Top languages for this repo */}
                 {repo.languages && repo.languages.length > 0 ? (
                   <div class="flex flex-wrap items-center gap-2 mt-2.5">
                     {repo.languages.map((lang) => (
@@ -184,6 +172,35 @@ const metadata = {
               </div>
             ))}
           </div>
+
+          {/* Private repos - collapsed by default */}
+          {ghData.recentRepos.filter((r) => r.isPrivate).length > 0 && (
+            <div class="mt-4" id="private-repos-section">
+              <button
+                type="button"
+                id="toggle-private-repos"
+                class="text-sm text-gray-500 hover:text-gray-700 transition-colors flex items-center gap-1.5"
+              >
+                <svg class="w-4 h-4 transition-transform" id="private-repos-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                {ghData.recentRepos.filter((r) => r.isPrivate).length} private {ghData.recentRepos.filter((r) => r.isPrivate).length === 1 ? 'project' : 'projects'}
+              </button>
+              <div id="private-repos-list" class="hidden mt-3 grid gap-3 sm:grid-cols-2">
+                {ghData.recentRepos.filter((r) => r.isPrivate).map((repo) => (
+                  <div class="rounded-lg border p-4 border-gray-200 bg-gray-50">
+                    <div class="flex items-start justify-between gap-2">
+                      <span class="inline-flex items-center gap-1.5 text-sm font-medium text-gray-400">
+                        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 16 16"><path d="M4 4a4 4 0 0 1 8 0v2h.25c.966 0 1.75.784 1.75 1.75v5.5A1.75 1.75 0 0 1 12.25 15h-8.5A1.75 1.75 0 0 1 2 13.25v-5.5C2 6.784 2.784 6 3.75 6H4Zm8.25 3.5h-8.5a.25.25 0 0 0-.25.25v5.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-5.5a.25.25 0 0 0-.25-.25ZM10.5 6V4a2.5 2.5 0 1 0-5 0v2Z" /></svg>
+                        Private project
+                      </span>
+                      <span class="text-xs text-gray-400 whitespace-nowrap shrink-0">
+                        {timeAgo(repo.pushedAt)}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
@@ -218,14 +235,14 @@ const metadata = {
         </section>
       )}
 
-      {/* Commit log */}
+      {/* Commit log — first 2 days visible, rest hidden */}
       <section class="py-16 bg-gray-50">
         <div class="container mx-auto px-4 max-w-4xl">
           <h2 class="text-xl font-semibold text-gray-900 mb-8">Recent commits</h2>
 
           <div class="relative border-l border-gray-300 ml-2">
-            {ghData.recentActivity.map((day) => (
-              <div class="mb-6 pl-6 relative">
+            {ghData.recentActivity.map((day, idx) => (
+              <div class:list={["mb-6 pl-6 relative", idx >= 2 && "commits-extra hidden"]}>
                 <div class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-gray-400"></div>
 
                 <p class="text-sm font-medium text-gray-900 mb-3">
@@ -279,8 +296,65 @@ const metadata = {
               </div>
             ))}
           </div>
+
+          {ghData.recentActivity.length > 2 && (
+            <button
+              type="button"
+              id="toggle-commits"
+              class="mt-4 text-sm text-gray-500 hover:text-gray-700 transition-colors flex items-center gap-1.5"
+            >
+              <svg class="w-4 h-4 transition-transform" id="commits-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              Show {ghData.recentActivity.length - 2} more {ghData.recentActivity.length - 2 === 1 ? 'day' : 'days'}
+            </button>
+          )}
         </div>
       </section>
+
+      {/* All public repositories */}
+      {ghData.allPublicRepos && ghData.allPublicRepos.length > 0 && (
+        <section class="py-16 bg-white">
+          <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-xl font-semibold text-gray-900 mb-6">All public repositories</h2>
+
+            <div class="grid gap-3 sm:grid-cols-2">
+              {ghData.allPublicRepos.map((repo) => (
+                <a href={repo.url} target="_blank" rel="noopener noreferrer"
+                   class="group rounded-lg border border-gray-200 p-4 hover:border-blue-300 transition-colors">
+                  <div class="flex items-start justify-between gap-2">
+                    <span class="text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors truncate">
+                      {repo.name}
+                    </span>
+                    {repo.stars > 0 && (
+                      <span class="flex items-center gap-0.5 text-xs text-gray-400 shrink-0">
+                        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z" /></svg>
+                        {repo.stars}
+                      </span>
+                    )}
+                  </div>
+                  {repo.description && (
+                    <p class="text-xs text-gray-500 mt-1 line-clamp-2">{repo.description}</p>
+                  )}
+                  {repo.languages && repo.languages.length > 0 ? (
+                    <div class="flex flex-wrap items-center gap-2 mt-2.5">
+                      {repo.languages.slice(0, 3).map((lang) => (
+                        <span class="flex items-center gap-1 text-xs text-gray-400">
+                          <span class="w-2 h-2 rounded-full shrink-0" style={`background-color: ${langColors[lang.name] || '#8b8b8b'}`}></span>
+                          {lang.name}
+                        </span>
+                      ))}
+                    </div>
+                  ) : repo.language ? (
+                    <div class="flex items-center gap-1 mt-2.5 text-xs text-gray-400">
+                      <span class="w-2 h-2 rounded-full" style={`background-color: ${langColors[repo.language] || '#8b8b8b'}`}></span>
+                      {repo.language}
+                    </div>
+                  ) : null}
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </>
   )}
 
@@ -384,4 +458,38 @@ const metadata = {
       </a>
     </div>
   </section>
+
+  <script>
+    // Toggle private repos
+    const toggleBtn = document.getElementById('toggle-private-repos');
+    const privateList = document.getElementById('private-repos-list');
+    const chevron = document.getElementById('private-repos-chevron');
+    if (toggleBtn && privateList && chevron) {
+      toggleBtn.addEventListener('click', () => {
+        const open = !privateList.classList.contains('hidden');
+        privateList.classList.toggle('hidden');
+        chevron.style.transform = open ? '' : 'rotate(90deg)';
+      });
+    }
+
+    // Toggle extra commit days
+    const toggleCommits = document.getElementById('toggle-commits');
+    const commitsChevron = document.getElementById('commits-chevron');
+    const extraDays = document.querySelectorAll('.commits-extra');
+    if (toggleCommits && extraDays.length > 0) {
+      let commitsExpanded = false;
+      toggleCommits.addEventListener('click', () => {
+        commitsExpanded = !commitsExpanded;
+        extraDays.forEach((el) => el.classList.toggle('hidden'));
+        if (commitsChevron) commitsChevron.style.transform = commitsExpanded ? 'rotate(180deg)' : '';
+        // Update button text
+        const textNode = Array.from(toggleCommits.childNodes).find((n) => n.nodeType === 3 && n.textContent.trim());
+        if (textNode) {
+          textNode.textContent = commitsExpanded
+            ? ' Show less'
+            : ` Show ${extraDays.length} more ${extraDays.length === 1 ? 'day' : 'days'}`;
+        }
+      });
+    }
+  </script>
 </Layout>

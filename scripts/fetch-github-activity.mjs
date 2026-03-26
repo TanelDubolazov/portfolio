@@ -318,6 +318,19 @@ async function main() {
 
   const languages = aggregateLanguages(repoLanguagesMap);
 
+  // All public repos for the "All repositories" section
+  const allPublicRepos = repos
+    .filter((r) => !r.isPrivate)
+    .map((repo) => {
+      const langs = repo.name && repoLanguagesMap[repo.name]
+        ? Object.entries(repoLanguagesMap[repo.name])
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 5)
+            .map(([name, bytes]) => ({ name, bytes }))
+        : [];
+      return { ...repo, languages: langs };
+    });
+
   const output = {
     generatedAt: new Date().toISOString(),
     username: GITHUB_USERNAME,
@@ -325,6 +338,7 @@ async function main() {
     languages,
     recentActivity,
     recentRepos: topRepos,
+    allPublicRepos,
   };
 
   fs.mkdirSync(path.dirname(OUT_PATH), { recursive: true });
