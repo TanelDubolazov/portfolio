@@ -11,7 +11,7 @@ metadata:
   title:
     default: tanel.dev
     template: '%s — AstroWind'
-  description: "\U0001F680 Personal Portfolio and Blog of Tanel Dubolazov."
+  description: 'Personal portfolio of Tanel Dubolazov, focused on software engineering and DevOps work.'
   robots:
     index: true
     follow: true
@@ -33,7 +33,7 @@ i18n:
 
 apps:
   blog:
-    isEnabled: true
+    isEnabled: false
     postsPerPage: 6
 
     post:
@@ -69,4 +69,4 @@ analytics:
       id: null # or "G-XXXXXXXXXX"
 
 ui:
-  theme: 'system' # Values: "system" | "light" | "dark" | "light:only" | "dark:only"
+  theme: 'light:only' # Fixed light theme for a consistent portfolio presentation
