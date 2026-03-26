@@ -48,6 +48,36 @@ async function ghFetch(url) {
 }
 
 // ---------------------------------------------------------------------------
+// Fetch recent GitHub Actions workflow runs for the portfolio repo
+// ---------------------------------------------------------------------------
+
+async function fetchWorkflowRuns() {
+  try {
+    const data = await ghFetch(
+      `https://api.github.com/repos/${GITHUB_USERNAME}/portfolio/actions/runs?per_page=3&status=completed`
+    );
+    if (!data || !data.workflow_runs) return [];
+    return data.workflow_runs.map((run) => ({
+      id: run.id,
+      name: run.name,
+      status: run.status,
+      conclusion: run.conclusion,
+      event: run.event,
+      createdAt: run.created_at,
+      updatedAt: run.updated_at,
+      url: run.html_url,
+      duration: run.updated_at && run.created_at
+        ? Math.round((new Date(run.updated_at) - new Date(run.created_at)) / 1000)
+        : null,
+    }));
+  } catch {
+    // actions:read permission may not be available
+    console.warn('Could not fetch workflow runs (actions:read permission needed)');
+    return [];
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Fetch recently active repos (sorted by push date)
 // ---------------------------------------------------------------------------
 
@@ -331,6 +361,9 @@ async function main() {
       return { ...repo, languages: langs };
     });
 
+  // Fetch recent GitHub Actions workflow runs
+  const workflowRuns = await fetchWorkflowRuns();
+
   const output = {
     generatedAt: new Date().toISOString(),
     username: GITHUB_USERNAME,
@@ -339,6 +372,7 @@ async function main() {
     recentActivity,
     recentRepos: topRepos,
     allPublicRepos,
+    workflowRuns,
   };
 
   fs.mkdirSync(path.dirname(OUT_PATH), { recursive: true });

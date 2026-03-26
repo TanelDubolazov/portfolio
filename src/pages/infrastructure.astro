@@ -1,0 +1,266 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import fs from 'fs';
+
+let ghData = null;
+try {
+  const ghFile = fs.readFileSync('./src/data/github-activity.json', 'utf8');
+  ghData = JSON.parse(ghFile);
+} catch {
+  // Will be generated on next build via GitHub Actions
+}
+
+const formatDate = (dateStr: string) => {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+};
+
+const formatDuration = (seconds: number) => {
+  if (seconds < 60) return `${seconds}s`;
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return secs > 0 ? `${mins}m ${secs}s` : `${mins}m`;
+};
+
+const metadata = {
+  title: 'Infrastructure',
+  description: 'How tanel.dev is built, deployed, and kept up to date automatically.',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Header -->
+  <section class="pt-24 pb-12 bg-white">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <h1 class="text-4xl font-bold tracking-tight text-gray-900">Infrastructure</h1>
+      <p class="mt-3 text-lg text-gray-500">
+        How this site is built, deployed, and kept up to date.
+      </p>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section class="pb-16 bg-white">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <div class="prose prose-gray max-w-none text-gray-600 text-sm leading-relaxed space-y-4">
+        <p>
+          Static site built with <strong class="text-gray-900">Astro</strong> and
+          <strong class="text-gray-900">Tailwind CSS</strong>. No server, no database. Just
+          pre-rendered HTML served from the edge.
+        </p>
+        <p>
+          Every push to <code class="text-gray-900 bg-gray-100 px-1.5 py-0.5 rounded text-xs">master</code> triggers
+          a build and deploy. A daily cron re-fetches GitHub data so the
+          <a href="/activity" class="text-blue-600 hover:underline">Projects</a> page stays current on its own.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pipeline diagram -->
+  <section class="pb-16 bg-white">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <h2 class="text-xl font-semibold text-gray-900 mb-8">Pipeline</h2>
+
+      <div class="relative">
+        <!-- Steps -->
+        <div class="space-y-0">
+          <!-- Step 1: Trigger -->
+          <div class="flex items-start gap-4">
+            <div class="flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-white text-sm font-medium shrink-0">1</div>
+              <div class="w-px h-full bg-gray-200 min-h-[2rem]"></div>
+            </div>
+            <div class="pb-8 pt-1.5">
+              <h3 class="text-sm font-semibold text-gray-900">Trigger</h3>
+              <p class="text-sm text-gray-500 mt-1">
+                A code push, the daily scheduled job, or a manual trigger starts the GitHub Actions workflow.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 2: Fetch -->
+          <div class="flex items-start gap-4">
+            <div class="flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-white text-sm font-medium shrink-0">2</div>
+              <div class="w-px h-full bg-gray-200 min-h-[2rem]"></div>
+            </div>
+            <div class="pb-8 pt-1.5">
+              <h3 class="text-sm font-semibold text-gray-900">Fetch GitHub data</h3>
+              <p class="text-sm text-gray-500 mt-1">
+                A script pulls repos, commits, and language stats from the GitHub API and writes a JSON file for the build.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 3: Build -->
+          <div class="flex items-start gap-4">
+            <div class="flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-white text-sm font-medium shrink-0">3</div>
+              <div class="w-px h-full bg-gray-200 min-h-[2rem]"></div>
+            </div>
+            <div class="pb-8 pt-1.5">
+              <h3 class="text-sm font-semibold text-gray-900">Build</h3>
+              <p class="text-sm text-gray-500 mt-1">
+                Astro compiles pages into static HTML, CSS, and JS. Images are optimized and HTML is minified.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 4: Deploy -->
+          <div class="flex items-start gap-4">
+            <div class="flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-white text-sm font-medium shrink-0">4</div>
+              <div class="w-px h-full bg-gray-200 min-h-[2rem]"></div>
+            </div>
+            <div class="pb-8 pt-1.5">
+              <h3 class="text-sm font-semibold text-gray-900">Deploy to S3</h3>
+              <p class="text-sm text-gray-500 mt-1">
+                The output is synced to an S3 bucket. Old files are cleaned up automatically.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 5: CDN -->
+          <div class="flex items-start gap-4">
+            <div class="flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-white text-sm font-medium shrink-0">5</div>
+            </div>
+            <div class="pt-1.5">
+              <h3 class="text-sm font-semibold text-gray-900">Serve via CloudFront</h3>
+              <p class="text-sm text-gray-500 mt-1">
+                CloudFront serves the site over HTTPS with global edge caching. The cache is cleared after every deploy.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stack -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <h2 class="text-xl font-semibold text-gray-900 mb-6">Stack</h2>
+
+      <div class="grid gap-3 sm:grid-cols-2">
+        <div class="rounded-lg border border-gray-200 bg-white p-4">
+          <h3 class="text-sm font-semibold text-gray-900">Framework</h3>
+          <p class="text-sm text-gray-500 mt-1">Astro 5 + Tailwind CSS, static output, zero JS by default</p>
+        </div>
+        <div class="rounded-lg border border-gray-200 bg-white p-4">
+          <h3 class="text-sm font-semibold text-gray-900">Hosting</h3>
+          <p class="text-sm text-gray-500 mt-1">AWS S3 for static files, CloudFront for CDN, HTTPS, and caching</p>
+        </div>
+        <div class="rounded-lg border border-gray-200 bg-white p-4">
+          <h3 class="text-sm font-semibold text-gray-900">CI/CD</h3>
+          <p class="text-sm text-gray-500 mt-1">GitHub Actions, build on push, daily cron for data refresh</p>
+        </div>
+        <div class="rounded-lg border border-gray-200 bg-white p-4">
+          <h3 class="text-sm font-semibold text-gray-900">Data</h3>
+          <p class="text-sm text-gray-500 mt-1">GitHub API to JSON at build time, no runtime API calls</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent deployments -->
+  {ghData?.workflowRuns && ghData.workflowRuns.length > 0 && (
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4 max-w-4xl">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-xl font-semibold text-gray-900">Recent deployments</h2>
+          <a
+            href="https://github.com/TanelDubolazov/portfolio/actions"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-xs text-gray-400 hover:text-blue-600 transition-colors flex items-center gap-1"
+          >
+            View all runs
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+          </a>
+        </div>
+
+        <div class="space-y-2">
+          {ghData.workflowRuns.map((run) => (
+            <a
+              href={run.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-3 p-3 rounded-lg border border-gray-200 hover:border-blue-300 transition-colors group"
+            >
+              {/* Status icon */}
+              {run.conclusion === 'success' ? (
+                <svg class="w-4 h-4 text-emerald-500 shrink-0" fill="currentColor" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z" /></svg>
+              ) : run.conclusion === 'failure' ? (
+                <svg class="w-4 h-4 text-red-500 shrink-0" fill="currentColor" viewBox="0 0 16 16"><path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06Z" /></svg>
+              ) : (
+                <svg class="w-4 h-4 text-gray-400 shrink-0" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0Z" /></svg>
+              )}
+
+              {/* Run info */}
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2">
+                  <span class="text-sm font-medium text-gray-900 group-hover:text-blue-600 transition-colors truncate">
+                    {run.name}
+                  </span>
+                  <span class:list={[
+                    "text-xs px-1.5 py-0.5 rounded-full",
+                    run.event === 'schedule' ? 'bg-purple-100 text-purple-600' :
+                    run.event === 'push' ? 'bg-blue-100 text-blue-600' :
+                    'bg-gray-100 text-gray-500'
+                  ]}>
+                    {run.event}
+                  </span>
+                </div>
+                <p class="text-xs text-gray-400 mt-0.5">
+                  {formatDate(run.createdAt)}
+                  {run.duration && ` · ${formatDuration(run.duration)}`}
+                </p>
+              </div>
+
+              {/* Conclusion badge */}
+              <span class:list={[
+                "text-xs font-medium px-2 py-0.5 rounded-full shrink-0",
+                run.conclusion === 'success' ? 'bg-emerald-100 text-emerald-700' :
+                run.conclusion === 'failure' ? 'bg-red-100 text-red-700' :
+                'bg-gray-100 text-gray-500'
+              ]}>
+                {run.conclusion}
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Source -->
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+      <p class="text-gray-600 mb-4">
+        The full source is public.
+      </p>
+      <div class="flex items-center justify-center gap-6">
+        <a
+          href="https://github.com/TanelDubolazov/portfolio"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" /></svg>
+          View source
+        </a>
+        <a
+          href="https://github.com/TanelDubolazov/portfolio/actions"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+          View workflows
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
