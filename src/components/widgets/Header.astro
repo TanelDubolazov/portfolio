@@ -77,7 +77,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
       aria-label="Main navigation"
     >
       <ul
-        class="flex flex-col md:flex-row md:self-center w-full md:w-auto text-xl md:text-[0.9375rem] tracking-[0.01rem] font-medium md:justify-center"
+        class="flex flex-col md:flex-row md:self-center w-full md:w-auto text-xl md:text-[0.9375rem] tracking-[0.01rem] font-medium md:justify-center mt-4 md:mt-0"
       >
         {
           links.map(({ text, href, links }) => (
@@ -110,7 +110,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
               ) : (
                 <a
                   class:list={[
-                    'hover:text-link px-4 py-3 flex items-center whitespace-nowrap',
+                    'hover:text-link px-4 py-3 md:py-3 flex items-center whitespace-nowrap',
                     { 'aw-link-active': href === currentPath },
                   ]}
                   href={href}
@@ -122,14 +122,20 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
           ))
         }
       </ul>
+      <div class="flex items-center justify-center gap-4 pt-4 mt-4 border-t border-gray-100 md:hidden">
+        <a href="mailto:Tanel.Dubolazov@gmail.com" aria-label="Email" class="p-2 text-gray-500 hover:text-gray-900 transition-colors">
+          <Icon name="tabler:mail" class="w-5 h-5" />
+        </a>
+        <a href="https://github.com/TanelDubolazov" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="p-2 text-gray-500 hover:text-gray-900 transition-colors">
+          <Icon name="tabler:brand-github" class="w-5 h-5" />
+        </a>
+        <a href="https://www.linkedin.com/in/tanel-dubolazov" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="p-2 text-gray-500 hover:text-gray-900 transition-colors">
+          <Icon name="tabler:brand-linkedin" class="w-5 h-5" />
+        </a>
+      </div>
     </nav>
-    <div
-      class:list={[
-        { 'ml-auto rtl:ml-0 rtl:mr-auto': position === 'left' },
-        'hidden md:self-center md:flex items-center md:mb-0 fixed w-full md:w-auto md:static justify-end left-0 rtl:left-auto rtl:right-0 bottom-0 p-3 md:p-0 md:justify-self-end',
-      ]}
-    >
-      <div class="items-center flex justify-between w-full md:w-auto gap-1">
+    <div class="hidden md:flex items-center md:justify-self-end">
+      <div class="items-center flex gap-1">
         <a href="mailto:Tanel.Dubolazov@gmail.com" aria-label="Email" class="p-2 text-gray-500 hover:text-gray-900 transition-colors">
           <Icon name="tabler:mail" class="w-5 h-5" />
         </a>
