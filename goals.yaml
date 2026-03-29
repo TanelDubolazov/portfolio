@@ -10,14 +10,14 @@ goals:
     extraCertLabel: 'Extra Certificate'
     milestones:
       - name: 'Go module'
-        date: 'Feb 25, 2025'
+        date: 'Mar 14, 2025'
         completed: true
         cert: '/certs/go-certificate.pdf'
       - name: 'JavaScript module'
-        date: 'Mar 15, 2025'
+        date: 'Dec 30, 2024'
         completed: true
         cert: '/certs/javascript-certificate.pdf'
       - name: 'DevOps module'
-        date: 'Apr 2025'
+        date: 'Apr 25, 2025'
         completed: true
         cert: '/certs/devops-certificate.pdf'

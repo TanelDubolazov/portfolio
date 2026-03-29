@@ -1,11 +1,10 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: 'Tanel Dubolazov | Software Developer',
+  title: 'Tanel Dubolazov | Software Engineer',
   description:
-    'Software engineer with a full-stack background and DevOps focus. Go, React, Docker, AWS, CI/CD.',
+    'Software engineer specializing in Go services, APIs, real-time systems, and reliable service architecture.',
 };
 ---
 
@@ -16,9 +15,8 @@ const metadata = {
       <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-gray-900">Tanel Dubolazov</h1>
       <p class="mt-2 text-xl text-gray-500">Software Engineer</p>
       <p class="mt-6 text-lg text-gray-700 max-w-2xl leading-relaxed">
-        Full-stack developer with a DevOps mindset. I build backend services in Go, frontend apps in React,
-        and wire it all together with Docker, CI/CD, and cloud infrastructure.
-        Previously 5+ years in e-commerce and digital marketing. I understand both the technical and business side.
+        Software engineer focused on Go services, API design, and real-time systems. I build reliable systems from data model to deployment,
+        and I care about maintainability, delivery speed, and business impact. I also bring 5+ years of e-commerce and digital marketing experience.
       </p>
       <div class="mt-8 flex flex-wrap gap-3">
         <a href="mailto:Tanel.Dubolazov@gmail.com" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors">Contact Me</a>
@@ -38,24 +36,24 @@ const metadata = {
           <p class="text-gray-600">Go, JavaScript/TypeScript, Bash, SQL</p>
         </div>
         <div>
-          <h3 class="font-semibold text-gray-900 mb-1">Backend</h3>
-          <p class="text-gray-600">REST APIs, WebSockets, Gin, Node.js, Express</p>
+          <h3 class="font-semibold text-gray-900 mb-1">Backend & APIs</h3>
+          <p class="text-gray-600">REST APIs, WebSocket systems, service architecture patterns</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">Databases</h3>
+          <p class="text-gray-600">PostgreSQL, SQLite, MySQL, schema design, migrations</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">Infrastructure</h3>
+          <p class="text-gray-600">Docker, GitHub Actions, AWS (EC2, S3, CloudFront), Terraform, Kubernetes manifests</p>
         </div>
         <div>
           <h3 class="font-semibold text-gray-900 mb-1">Frontend</h3>
           <p class="text-gray-600">React, Vite, Tailwind CSS, Astro</p>
         </div>
         <div>
-          <h3 class="font-semibold text-gray-900 mb-1">Databases</h3>
-          <p class="text-gray-600">PostgreSQL, SQLite, MySQL</p>
-        </div>
-        <div>
-          <h3 class="font-semibold text-gray-900 mb-1">DevOps & Cloud</h3>
-          <p class="text-gray-600">Docker, GitHub Actions, Terraform, AWS (S3, CloudFront, EC2)</p>
-        </div>
-        <div>
-          <h3 class="font-semibold text-gray-900 mb-1">Tools</h3>
-          <p class="text-gray-600">Git, Vagrant, Postman, Cisco networking</p>
+          <h3 class="font-semibold text-gray-900 mb-1">Tooling</h3>
+          <p class="text-gray-600">Git, Postman, Docker Compose</p>
         </div>
       </div>
     </div>
@@ -64,7 +62,7 @@ const metadata = {
   <!-- Featured Projects -->
   <section id="projects" class="py-16 bg-white">
     <div class="container mx-auto px-4 max-w-5xl">
-      <h2 class="text-2xl font-bold text-gray-900 mb-10">Projects</h2>
+      <h2 class="text-2xl font-bold text-gray-900 mb-10">Highlighted Projects</h2>
 
       <!-- Gunn-MX Motocross Store -->
       <div class="mb-12 md:grid md:grid-cols-5 md:gap-8 items-start">
@@ -73,21 +71,20 @@ const metadata = {
           <img src="/images/Motocross-store-warehouse.png" alt="Gunn-MX warehouse management panel" class="project-img rounded-lg border border-gray-200 w-full mt-3" loading="lazy" />
         </div>
         <div class="md:col-span-3">
-          <h3 class="text-xl font-bold text-gray-900">Gunn MX Motocross service    Store</h3>
-          <p class="mt-1 text-sm text-gray-500">Solo project</p>
+          <h3 class="text-xl font-bold text-gray-900">Gunn MX Motocross Store</h3>
+          <p class="mt-1 text-sm text-gray-500">Private client project, solo full-stack ownership</p>
           <p class="mt-3 text-gray-700">
-            Full-stack e-commerce application for a motocross parts store. Customers can browse products filtered by bike compatibility,
-            add items to cart, and check out with multiple payment and shipping options.
-            The admin side includes a warehouse management panel for inventory, orders, and shipment tracking.
+            Private e-commerce platform built for a motocross parts business that previously handled most orders in person or by phone.
+            The main goal was to move key sales and inventory flows online without adding extra day-to-day workload for the owner.
           </p>
           <ul class="mt-3 space-y-1 text-sm text-gray-600">
-            <li>Go backend with REST API and authentication</li>
-            <li>React + TypeScript frontend</li>
-            <li>Relational database, admin tooling</li>
-            <li>Docker containerized, automated build pipeline</li>
+            <li><strong>Customer flow:</strong> Vehicle-based filtering to reduce wrong-part orders and support self-service purchases</li>
+            <li><strong>Owner workflow:</strong> Internal dashboard for stock updates, order handling, and warehouse visibility</li>
+            <li><strong>System design:</strong> Go REST API with JWT auth, service layer for orders/inventory, relational schema design</li>
+            <li><strong>Operations:</strong> Docker containerization, CI/CD pipeline, AWS deployment</li>
           </ul>
           <div class="mt-4">
-            <a href="https://gunnmx.ee" target="_blank" class="text-sm text-blue-600 hover:underline">Visit Site</a>
+            <span class="text-sm text-gray-500">Private client deployment. Public catalog launch is in progress.</span>
           </div>
         </div>
       </div>
@@ -99,16 +96,18 @@ const metadata = {
         </div>
         <div class="md:col-span-3">
           <h3 class="text-xl font-bold text-gray-900">Social Network</h3>
-          <p class="mt-1 text-sm text-gray-500">Team project (2 developers) — kood/jõhvi</p>
+          <p class="mt-1 text-sm text-gray-500">Team project (2 developers), kood/Jõhvi curriculum</p>
           <p class="mt-3 text-gray-700">
-            Facebook-style social platform with profiles, posts with privacy controls, follow system, groups, events,
-            and real-time chat via WebSockets. Built as part of the kood/jõhvi curriculum.
+            Full-featured social platform with privacy-aware post feeds, multi-level group permissions,
+            real-time messaging, and WebSocket communication. Built around access control, feed filtering,
+            and event distribution.
           </p>
           <ul class="mt-3 space-y-1 text-sm text-gray-600">
-            <li>Go backend (stdlib HTTP server), gorilla/websocket for real-time features</li>
-            <li>React 18 frontend with Material UI</li>
-            <li>SQLite with golang-migrate for schema management</li>
-            <li>Containerized with Docker Compose</li>
+            <li><strong>Core services:</strong> Go stdlib HTTP server, privacy/permission logic, feed algorithms, WebSocket multiplexing</li>
+            <li><strong>Real-time systems:</strong> gorilla/websocket for notifications and live chat with connection management</li>
+            <li><strong>Database:</strong> SQLite schema design for posts, follows, groups, permissions; golang-migrate for versioning</li>
+            <li><strong>Infrastructure:</strong> Docker Compose multi-service setup, containerized deployment pipeline</li>
+            <li><strong>Frontend:</strong> React 18 integration with backend APIs (secondary responsibility)</li>
           </ul>
           <div class="mt-4">
             <a href="https://github.com/TanelDubolazov/social-network" target="_blank" class="text-sm text-blue-600 hover:underline">View on GitHub</a>
@@ -116,32 +115,33 @@ const metadata = {
         </div>
       </div>
 
-      <!-- CRUD Master -->
+      <!-- Crud Master / Containerized API -->
       <div class="mb-12 md:grid md:grid-cols-5 md:gap-8 items-start">
         <div class="md:col-span-2 mb-4 md:mb-0">
-          <img src="/images/crud-master-diagram.png" alt="CRUD Master microservices architecture" class="project-img rounded-lg border border-gray-200 w-full" loading="lazy" />
+          <img src="/images/containerized-api.png" alt="Crud Master and Containerized API architecture diagram" class="project-img rounded-lg border border-gray-200 w-full" loading="lazy" />
         </div>
         <div class="md:col-span-3">
-          <h3 class="text-xl font-bold text-gray-900">CRUD Master Microservices API</h3>
-          <p class="mt-1 text-sm text-gray-500">Solo project — kood/jõhvi</p>
+          <h3 class="text-xl font-bold text-gray-900">Crud Master / Containerized API</h3>
+          <p class="mt-1 text-sm text-gray-500">Infrastructure-focused systems project, kood/Jõhvi curriculum</p>
           <p class="mt-3 text-gray-700">
-            Microservices-based movie streaming API with an API Gateway for request routing and RabbitMQ for async messaging
-            between services. Provisioned across three VMs using Vagrant.
+            Built and evolved a 3-service application (gateway, inventory, billing) to improve reliability and deployment consistency.
+            Started with VM-based provisioning and process management, then moved to container-first orchestration with Docker Compose.
           </p>
           <ul class="mt-3 space-y-1 text-sm text-gray-600">
-            <li>Node.js services (API Gateway, Inventory, Billing)</li>
-            <li>PostgreSQL databases per service</li>
-            <li>RabbitMQ for inter-service messaging</li>
-            <li>Vagrant for multi-VM provisioning</li>
+            <li><strong>Service architecture:</strong> API gateway, PostgreSQL-backed inventory/billing services, RabbitMQ messaging</li>
+            <li><strong>Operations:</strong> Dockerfiles, Compose networking, persistent volumes, startup dependencies, restart policies</li>
+            <li><strong>Automation:</strong> setup scripts, environment templating, repeatable local deployment workflow</li>
+            <li><strong>Validation:</strong> OpenAPI docs and Postman collections for end-to-end API testing</li>
           </ul>
-          <div class="mt-4">
-            <a href="https://github.com/TanelDubolazov/crud-master" target="_blank" class="text-sm text-blue-600 hover:underline">View on GitHub</a>
+          <div class="mt-4 flex flex-wrap gap-4">
+            <a href="https://github.com/TanelDubolazov/crud-master" target="_blank" class="text-sm text-blue-600 hover:underline">View Crud Master</a>
+            <a href="https://github.com/TanelDubolazov/containerized-api" target="_blank" class="text-sm text-blue-600 hover:underline">View Containerized API</a>
           </div>
         </div>
       </div>
 
       <div class="text-center">
-        <a href="/activity" class="text-sm text-blue-600 hover:underline">All projects & GitHub activity →</a>
+        <a href="/activity" class="text-sm text-blue-600 hover:underline">Recent activity & milestones →</a>
       </div>
     </div>
   </section>
@@ -153,16 +153,16 @@ const metadata = {
         <div>
           <h2 class="text-2xl font-bold text-gray-900 mb-6">Education</h2>
           <div>
-            <h3 class="font-semibold text-gray-900">kood/jõhvi</h3>
-            <p class="text-sm text-gray-500">Full-Stack Development, DevOps specialization</p>
+            <h3 class="font-semibold text-gray-900">kood/Jõhvi</h3>
+            <p class="text-sm text-gray-500">Backend Engineering & Systems Development</p>
             <p class="text-sm text-gray-500">2023 – 2025</p>
             <p class="mt-2 text-gray-600 text-sm">
-              Intensive peer-learning program. Built 20+ projects in Go and JavaScript covering
-              backend systems, frontend apps, networking, Docker, and CI/CD.
+              Intensive peer-learning program specializing in Go backend services, REST API design, and systems reliability.
+              Built 20+ projects covering service architecture, databases, real-time systems, and deployment infrastructure.
             </p>
             <a href="/certs/graduation-diploma.pdf" target="_blank" rel="noopener noreferrer"
               class="inline-block mt-3 text-sm text-blue-600 hover:underline">
-              View Graduation Diploma
+              See Graduation Diploma
             </a>
           </div>
         </div>
@@ -170,14 +170,15 @@ const metadata = {
           <h2 class="text-2xl font-bold text-gray-900 mb-6">Experience</h2>
           <div class="mb-6">
             <h3 class="font-semibold text-gray-900">Student Developer & Auditor</h3>
-            <p class="text-sm text-gray-500">kood/jõhvi — 2023 – 2025</p>
+            <p class="text-sm text-gray-500">kood/Jõhvi, 2023 - 2025</p>
             <p class="mt-2 text-gray-600 text-sm">
-              Full-stack projects with strict deadlines in Agile teams. Performed code reviews and technical audits for peers.
+              Backend-focused projects with strict deadlines in Agile teams. Specialized in Go service development, API design,
+              and database architecture. Performed technical code reviews and system design audits for peers.
             </p>
           </div>
           <div>
             <h3 class="font-semibold text-gray-900">Marketing Specialist</h3>
-            <p class="text-sm text-gray-500">Freelance — 2018 – 2023</p>
+            <p class="text-sm text-gray-500">Freelance, 2018 - 2023</p>
             <p class="mt-2 text-gray-600 text-sm">
               Built and managed Shopify stores, ran data-driven ad campaigns, handled product databases and pricing automation.
             </p>
@@ -188,15 +189,20 @@ const metadata = {
   </section>
 
   <!-- CTA -->
-  <CallToAction
-    title="Open for work"
-    subtitle="Available for backend, full-stack, or DevOps engineering roles."
-    actions={[
-      { variant: 'primary', text: 'Contact Me', href: '/contact#form' },
-      { text: 'View Projects', href: '/activity' },
-    ]}
-    classes={{ container: 'max-w-xl' }}
-  />
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+      <p class="text-gray-600 mb-4">
+        Interested in working together?
+      </p>
+      <a
+        href="mailto:Tanel.Dubolazov@gmail.com"
+        class="inline-flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+        Get in touch
+      </a>
+    </div>
+  </section>
 </Layout>
 
 <style>
